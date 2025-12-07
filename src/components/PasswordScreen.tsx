@@ -52,6 +52,9 @@ const PasswordScreen = ({ onSuccess }: PasswordScreenProps) => {
               maxLength={5} 
               value={password}
               onChange={(value) => setPassword(value)}
+              inputMode="text"
+              pattern="[A-Za-z0-9]*"
+              autoCapitalize="characters"
               className="justify-center"
             >
               <InputOTPGroup className="gap-2">
