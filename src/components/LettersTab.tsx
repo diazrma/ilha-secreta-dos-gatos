@@ -42,7 +42,7 @@ Rodrigo 🐱💕`
   {
     id: 3,
     title: "O que você representa",
-    content: `Minha Aninha,
+    content: `Aninha,
 
 Você representa uma parte bonita dos meus dias. Uma notificação que me faz sorrir. Uma conversa que eu espero. Um brilho diferente na rotina.
 
