@@ -12,7 +12,7 @@ const letters = [
   {
     id: 1,
     title: "Para começar...",
-    content: `,
+    content: `Aninha posso te chamar assim ?,
 
 Se você está lendo isso, é porque de alguma forma nossas conversas, nossos gatinhos e nossas risadas pelo WhatsApp criaram algo especial.
 
@@ -74,7 +74,7 @@ Rodrigo 🐱💕`
   {
     id: 5,
     title: "Para o que está por vir",
-    content: `Minha Aninha,
+    content: `Aninha,
 
 Esta é a última carta por enquanto, mas a nossa história está só começando.
 
