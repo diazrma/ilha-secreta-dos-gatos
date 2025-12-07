@@ -12,29 +12,31 @@ const letters = [
   {
     id: 1,
     title: "Para começar...",
-    content: `Minha Aninha,
+    content: `,
 
-Se você está lendo isso, significa que encontrou o caminho até nossa ilha secreta. Este lugar foi criado especialmente para você, para guardar todos os recados que eu quero te enviar.
+Se você está lendo isso, é porque de alguma forma nossas conversas, nossos gatinhos e nossas risadas pelo WhatsApp criaram algo especial.
 
-Cada carta aqui representa um pedacinho do meu coração. Espero que você sinta todo o carinho que coloquei em cada palavra.
+Mesmo sem estarmos no mesmo lugar, senti vontade de guardar aqui alguns pedacinhos dos meus pensamentos para você. Como se essa página fosse uma extensão do que a gente já compartilha em mensagens, áudios e fotos fofas de gato.
 
-Você é especial demais para mim. Obrigado por existir na minha vida.
+Cada carta aqui é um carinho em forma de palavras. Um recado para você, de mim, do jeitinho que sei fazer.
 
-Com todo meu amor,
+Com carinho,
 Rodrigo 🐱💕`
   },
   {
     id: 2,
     title: "Sobre nós dois",
-    content: `Aninha da minha vida,
+    content: `Aninha,
 
-Sabe o que mais gosto em nós? A forma como nos entendemos sem precisar de muitas palavras. Os olhares, os sorrisos... tudo faz sentido quando estou com você.
+É engraçado pensar que tudo começou com gatos... e agora aqui estamos, conversando quase todos os dias, rindo, flertando e descobrindo coisas um sobre o outro.
 
-Cada momento ao seu lado é um presente. Desde as risadas bobas até os abraços apertados no final do dia.
+Mesmo à distância, sinto que existe uma conexão leve, gostosa, diferente. Você tem um jeito que acalma, diverte e ao mesmo tempo desperta minha curiosidade.
 
-Você transforma dias comuns em memórias incríveis.
+Adoro nossos papos aleatórios, nossos planos meio doidos e até as brincadeiras sobre casamento.
 
-Te amo infinitamente,
+Quem diria que Belém e Brusque poderiam se aproximar desse jeito?
+
+Com carinho,
 Rodrigo 🐱💕`
   },
   {
@@ -42,46 +44,53 @@ Rodrigo 🐱💕`
     title: "O que você representa",
     content: `Minha Aninha,
 
-Você é minha paz em dias caóticos. Meu sorriso quando acordo. Minha certeza de que amor de verdade existe.
+Você representa uma parte bonita dos meus dias. Uma notificação que me faz sorrir. Uma conversa que eu espero. Um brilho diferente na rotina.
 
-Às vezes me pego pensando em como tive sorte de te encontrar. Em milhões de pessoas, você apareceu na minha vida e mudou tudo.
+Mesmo sem ter te conhecido pessoalmente ainda, você já é especial pra mim. Pela forma como fala, pela maneira que cuida dos seus gatinhos, pelo seu jeitinho doce e sincero.
 
-Obrigado por ser você. Por me aceitar como sou. Por me fazer querer ser melhor todos os dias.
+Você me faz sonhar com possibilidades, encontros, abraços futuros e histórias que ainda vamos viver.
 
-Eternamente seu,
+Obrigado por existir e por ter cruzado meu caminho... nem que tenha sido através de uma tela.
+
+Com carinho,
 Rodrigo 🐱💕`
   },
   {
     id: 4,
     title: "Nossos sonhos",
-    content: `Minha Aninha,
+    content: `Aninha,
 
-Sonho com tantas coisas ao seu lado... Viagens, aventuras, tardes preguiçosas, noites estreladas. Tudo fica melhor quando imagino você comigo.
+Às vezes imagino como seria quando finalmente nos encontrarmos. Como vai ser ouvir sua voz sem fone, ver seu sorriso de pertinho, rir das nossas próprias piadas cara a cara.
 
-Quero construir uma vida cheia de momentos felizes com você. Uma vida onde cada dia seja uma nova oportunidade de te fazer sorrir.
+Sonho com o dia em que a distância vai ser só uma lembrança engraçada de como tudo começou: com gatos, mensagens e um flerte despretensioso.
 
-O futuro me anima porque sei que você estará nele.
+Talvez a gente viaje, talvez tome um café juntos, talvez simplesmente fique em silêncio confortável olhando nossos celulares cheios de fotos de gatos.
 
-Com amor infinito,
+Mas uma coisa eu sei: quero viver esses momentos com você.
+
+Com carinho,
 Rodrigo 🐱💕`
   },
   {
     id: 5,
-    title: "Para sempre",
+    title: "Para o que está por vir",
     content: `Minha Aninha,
 
-Esta é a última carta desta série, mas não a última das nossas histórias. Ainda temos muito para viver juntos.
+Esta é a última carta por enquanto, mas a nossa história está só começando.
 
-Quero que você saiba que, não importa o que aconteça, estarei sempre aqui. Nos dias bons e nos difíceis. Nas vitórias e nas quedas.
+Não sei exatamente onde ela vai nos levar, mas a ideia de um "nós" me deixa feliz, curioso e esperançoso.
 
-Você é minha pessoa. Minha escolha. Meu amor.
+Quero que você saiba que gosto de você de verdade. Do seu jeito, da sua companhia virtual que já virou parte importante dos meus dias.
 
-Para sempre e mais um dia,
+E se um dia a gente realmente cumprir a promessa brincando sobre casamento… vai ser uma história linda pra contar: tudo começou com gatos.
+
+Com carinho e um sorriso bobo no rosto,
 Rodrigo 🐱💕
 
-P.S.: Te amo mais do que palavras podem expressar. 💕`
+P.S.: Ainda vou te mandar muitas fotos de gatos, então isso aqui é só o começo 🐾`
   }
 ];
+
 
 const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
   const [selectedLetter, setSelectedLetter] = useState<number | null>(null);
