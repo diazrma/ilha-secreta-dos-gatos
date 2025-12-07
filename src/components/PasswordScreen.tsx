@@ -6,7 +6,7 @@ interface PasswordScreenProps {
   onSuccess: () => void;
 }
 
-const CORRECT_PASSWORD = "12345"; // Senha padrão - pode ser alterada
+const CORRECT_PASSWORD = "L58IA";
 
 const PasswordScreen = ({ onSuccess }: PasswordScreenProps) => {
   const [password, setPassword] = useState('');
