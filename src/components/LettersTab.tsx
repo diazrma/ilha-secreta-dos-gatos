@@ -12,7 +12,7 @@ const letters = [
   {
     id: 1,
     title: "Para começar...",
-    content: `Meu amor,
+    content: `Minha Aninha,
 
 Se você está lendo isso, significa que encontrou o caminho até nossa ilha secreta. Este lugar foi criado especialmente para você, para guardar todos os recados que eu quero te enviar.
 
@@ -21,12 +21,12 @@ Cada carta aqui representa um pedacinho do meu coração. Espero que você sinta
 Você é especial demais para mim. Obrigado por existir na minha vida.
 
 Com todo meu amor,
-Seu gatinho 🐱💕`
+Rodrigo 🐱💕`
   },
   {
     id: 2,
     title: "Sobre nós dois",
-    content: `Amor da minha vida,
+    content: `Aninha da minha vida,
 
 Sabe o que mais gosto em nós? A forma como nos entendemos sem precisar de muitas palavras. Os olhares, os sorrisos... tudo faz sentido quando estou com você.
 
@@ -35,12 +35,12 @@ Cada momento ao seu lado é um presente. Desde as risadas bobas até os abraços
 Você transforma dias comuns em memórias incríveis.
 
 Te amo infinitamente,
-Seu gatinho 🐱💕`
+Rodrigo 🐱💕`
   },
   {
     id: 3,
     title: "O que você representa",
-    content: `Minha pessoa favorita,
+    content: `Minha Aninha,
 
 Você é minha paz em dias caóticos. Meu sorriso quando acordo. Minha certeza de que amor de verdade existe.
 
@@ -49,12 +49,12 @@ Você é minha paz em dias caóticos. Meu sorriso quando acordo. Minha certeza d
 Obrigado por ser você. Por me aceitar como sou. Por me fazer querer ser melhor todos os dias.
 
 Eternamente seu,
-Seu gatinho 🐱💕`
+Rodrigo 🐱💕`
   },
   {
     id: 4,
     title: "Nossos sonhos",
-    content: `Meu amor,
+    content: `Minha Aninha,
 
 Sonho com tantas coisas ao seu lado... Viagens, aventuras, tardes preguiçosas, noites estreladas. Tudo fica melhor quando imagino você comigo.
 
@@ -63,12 +63,12 @@ Quero construir uma vida cheia de momentos felizes com você. Uma vida onde cada
 O futuro me anima porque sei que você estará nele.
 
 Com amor infinito,
-Seu gatinho 🐱💕`
+Rodrigo 🐱💕`
   },
   {
     id: 5,
     title: "Para sempre",
-    content: `Meu grande amor,
+    content: `Minha Aninha,
 
 Esta é a última carta desta série, mas não a última das nossas histórias. Ainda temos muito para viver juntos.
 
@@ -77,7 +77,7 @@ Quero que você saiba que, não importa o que aconteça, estarei sempre aqui. No
 Você é minha pessoa. Minha escolha. Meu amor.
 
 Para sempre e mais um dia,
-Seu gatinho 🐱💕
+Rodrigo 🐱💕
 
 P.S.: Te amo mais do que palavras podem expressar. 💕`
   }
