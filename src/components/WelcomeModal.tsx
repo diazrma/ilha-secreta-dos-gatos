@@ -22,7 +22,7 @@ const WelcomeModal = ({ open, onClose }: WelcomeModalProps) => {
           </DialogTitle>
           <DialogDescription className="text-foreground/80 text-base mt-4 space-y-3">
             <p>
-              Este é um lugar especial criado só para você, meu amor!
+              Este é um lugar especial criado só para você, Aninha!
             </p>
             <p className="text-left bg-secondary/30 p-4 rounded-xl">
               <strong className="text-primary">Como funciona:</strong>
