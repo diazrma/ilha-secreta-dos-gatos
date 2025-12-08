@@ -91,15 +91,14 @@ P.S.: Ainda vou te mandar muitas fotos de gatos, então isso aqui é só o come�
   }
 ];
 
-
 const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
   const [selectedLetter, setSelectedLetter] = useState<number | null>(null);
-  
+
   const getDaysAvailable = () => {
     const now = new Date();
     const diffTime = Math.abs(now.getTime() - firstVisitDate.getTime());
     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    return Math.min(diffDays + 1, 5); // +1 porque o primeiro dia conta
+    return Math.min(diffDays + 1, 5);
   };
 
   const daysAvailable = getDaysAvailable();
@@ -111,6 +110,25 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
   const getDaysUntilUnlock = (index: number) => {
     return index - daysAvailable + 1;
   };
+
+  // ✅ MENSAGEM DE NATAL / ANO NOVO
+  const getHolidayMessage = () => {
+    const now = new Date();
+    const day = now.getDate();
+    const month = now.getMonth() + 1; // Janeiro = 1
+
+    if (day === 25 && month === 12) {
+      return "🎄 Feliz Natal, Aninha. Que seu dia seja leve, cheio de carinho, amor e cercado de boas energias!";
+    }
+    
+    if ((day === 31 && month === 12) || (day === 1 && month === 1)) {
+      return "🎆 Feliz Ano Novo, Aninha. Que esse novo ano nos aproxime ainda mais.";
+    }
+
+    return null;
+  };
+
+  const holidayMessage = getHolidayMessage();
 
   if (selectedLetter !== null) {
     const letter = letters[selectedLetter];
@@ -124,7 +142,7 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
           <ArrowLeft className="w-4 h-4 mr-2" />
           Voltar aos recados
         </Button>
-        
+
         <Card className="max-w-2xl mx-auto shadow-card border-border overflow-hidden">
           <div className="bg-secondary/30 p-4 border-b border-border">
             <h3 className="text-xl font-handwritten text-primary flex items-center gap-2">
@@ -146,6 +164,18 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
 
   return (
     <div className="animate-fade-in">
+
+      {/* ✅ MENSAGEM ESPECIAL PARA DATAS COMEMORATIVAS */}
+      {holidayMessage && (
+        <Card className="max-w-2xl mx-auto mb-6 shadow-card border-primary/40 bg-primary/5">
+          <CardContent className="p-6 text-center">
+            <p className="font-handwritten text-xl text-primary">
+              {holidayMessage}
+            </p>
+          </CardContent>
+        </Card>
+      )}
+
       <div className="text-center mb-8">
         <img 
           src={catLetter} 
@@ -164,7 +194,7 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
         {letters.map((letter, index) => {
           const available = isLetterAvailable(index);
           const daysLeft = getDaysUntilUnlock(index);
-          
+
           return (
             <Card 
               key={letter.id}
@@ -188,7 +218,7 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
                     <Lock className="w-5 h-5" />
                   )}
                 </div>
-                
+
                 <div className="flex-1">
                   <h3 className={`font-medium ${available ? 'text-foreground' : 'text-muted-foreground'}`}>
                     Carta {index + 1}: {letter.title}
