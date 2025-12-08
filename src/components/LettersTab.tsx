@@ -18,7 +18,7 @@ interface LettersTabProps {
 // true = força data definida abaixo
 const TEST_MODE = true;
 
-const TEST_DAY = 25;   // Natal = 25
+const TEST_DAY = 31;   // Natal = 25
 const TEST_MONTH = 12; // Dezembro = 12
 
 // Ano Novo:
