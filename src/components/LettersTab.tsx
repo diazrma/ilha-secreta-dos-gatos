@@ -58,7 +58,7 @@ Rodrigo 🐱💕`
 
 Mesmo à distância, sinto que existe uma conexão leve, gostosa, diferente. Você tem um jeito que acalma, diverte e ao mesmo tempo desperta minha curiosidade.
 
-Adoro nossos papos aleatórios, nossos planos meio doidos e até as brincadeiras sobre casamento.
+Adoro nossos papos aleatórios, nossos planos meio doidos e até as conversas sobre casamento.
 
 Quem diria que Belém e Brusque poderiam se aproximar desse jeito?
 
