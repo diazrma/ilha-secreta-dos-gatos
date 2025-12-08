@@ -8,6 +8,32 @@ interface LettersTabProps {
   firstVisitDate: Date;
 }
 
+/**
+ * =======================
+ * 🔧 CONFIGURAÇÃO DO TESTE
+ * =======================
+ */
+
+// false = usa data real
+// true = força data definida abaixo
+const TEST_MODE = false;
+
+const TEST_DAY = 25;   // Natal = 25
+const TEST_MONTH = 12; // Dezembro = 12
+
+// Ano Novo:
+// const TEST_DAY = 31;
+// const TEST_MONTH = 12;
+
+// const TEST_DAY = 1;
+// const TEST_MONTH = 1;
+
+
+/**
+ * =======================
+ * ✉️ CARTAS
+ * =======================
+ */
 const letters = [
   {
     id: 1,
@@ -91,6 +117,12 @@ P.S.: Ainda vou te mandar muitas fotos de gatos, então isso aqui é só o come�
   }
 ];
 
+
+/**
+ * =======================
+ * COMPONENTE
+ * =======================
+ */
 const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
   const [selectedLetter, setSelectedLetter] = useState<number | null>(null);
 
@@ -111,18 +143,22 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
     return index - daysAvailable + 1;
   };
 
-  // ✅ MENSAGEM DE NATAL / ANO NOVO
+
+  /**
+   * ✅ MENSAGEM DE NATAL / ANO NOVO
+   */
   const getHolidayMessage = () => {
     const now = new Date();
-    const day = now.getDate();
-    const month = now.getMonth() + 1; // Janeiro = 1
+
+    const day = TEST_MODE ? TEST_DAY : now.getDate();
+    const month = TEST_MODE ? TEST_MONTH : now.getMonth() + 1;
 
     if (day === 25 && month === 12) {
-      return "🎄 Feliz Natal, Aninha. Que seu dia seja leve, cheio de carinho, amor e cercado de boas energias!";
+      return "🎄 Feliz Natal, Aninha! Que seu dia seja leve, cheio de carinho, amor e cercado de boas energias (e muitos miadinhos 🐾)";
     }
-    
+
     if ((day === 31 && month === 12) || (day === 1 && month === 1)) {
-      return "🎆 Feliz Ano Novo, Aninha. Que esse novo ano nos aproxime ainda mais.";
+      return "🎆 Feliz Ano Novo, Aninha! Que esse novo ano nos aproxime ainda mais, traga encontros, sorrisos, saúde, amor e momentos inesquecíveis pra nós dois 🐱💖";
     }
 
     return null;
@@ -130,8 +166,10 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
 
   const holidayMessage = getHolidayMessage();
 
+
   if (selectedLetter !== null) {
     const letter = letters[selectedLetter];
+
     return (
       <div className="animate-fade-in">
         <Button 
@@ -150,6 +188,7 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
               {letter.title}
             </h3>
           </div>
+
           <CardContent className="p-0">
             <div className="letter-paper p-6 min-h-[400px]">
               <p className="font-handwritten text-xl leading-relaxed text-foreground whitespace-pre-line">
@@ -162,16 +201,22 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
     );
   }
 
+
   return (
     <div className="animate-fade-in">
 
-      {/* ✅ MENSAGEM ESPECIAL PARA DATAS COMEMORATIVAS */}
+      {/* ✅ MENSAGEM DE NATAL / ANO NOVO */}
       {holidayMessage && (
         <Card className="max-w-2xl mx-auto mb-6 shadow-card border-primary/40 bg-primary/5">
           <CardContent className="p-6 text-center">
             <p className="font-handwritten text-xl text-primary">
               {holidayMessage}
             </p>
+            {TEST_MODE && (
+              <p className="text-xs text-muted-foreground mt-2">
+                ⚠️ Modo teste ativo ({TEST_DAY}/{TEST_MONTH})
+              </p>
+            )}
           </CardContent>
         </Card>
       )}
