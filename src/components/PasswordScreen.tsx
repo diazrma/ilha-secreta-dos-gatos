@@ -80,8 +80,7 @@ const PasswordScreen = ({ onSuccess }: PasswordScreenProps) => {
           )}
 
           <p className="text-muted-foreground text-xs mt-6">
-           Dica: Se ficou na dúvida, pergunte a quem te enviou este link 💕
-           Cada episódio da Milkinha contém uma letra ou número que compõe a senha.
+           Dica: Cada episódio da Milkinha contém uma letra ou número que compõe a senha. 💕
           </p>
         </div>
       </div>
