@@ -16,7 +16,7 @@ interface LettersTabProps {
 
 // false = usa data real
 // true = força data definida abaixo
-const TEST_MODE = false;
+const TEST_MODE = true;
 
 const TEST_DAY = 25;   // Natal = 25
 const TEST_MONTH = 12; // Dezembro = 12
