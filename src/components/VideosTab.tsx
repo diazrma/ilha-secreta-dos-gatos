@@ -11,7 +11,6 @@ const VideosTab = () => {
     "https://www.youtube.com/embed/XH70G6bKbAY",
   ];
 
-  // Função para ir até o final da página
   const scrollToBottom = () => {
     window.scrollTo({
       top: document.body.scrollHeight,
@@ -20,43 +19,45 @@ const VideosTab = () => {
   };
 
   return (
-    <div className="animate-fade-in text-center">
-      <img 
-        src={catSleeping} 
-        alt="Gatinho dormindo" 
-        className="w-32 h-32 mx-auto mb-6"
-      />
-      
-      <h2 className="text-3xl font-handwritten text-gradient mb-2">
-        Vídeos Especiais
-      </h2>
+    <>
+      <div className="animate-fade-in text-center">
+        <img 
+          src={catSleeping} 
+          alt="Gatinho dormindo" 
+          className="w-32 h-32 mx-auto mb-6"
+        />
+        
+        <h2 className="text-3xl font-handwritten text-gradient mb-2">
+          Vídeos Especiais
+        </h2>
 
-      <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-        Esse gatinho deixou alguns vídeos muito especiais para você.  
-        Assista novamente quando quiser! 🐱💖  
-        Em breve chegarão novos vídeos.
-      </p>
+        <p className="text-muted-foreground mb-8 max-w-md mx-auto">
+          Esse gatinho deixou alguns vídeos muito especiais para você.  
+          Assista novamente quando quiser! 🐱💖  
+          Em breve chegarão novos vídeos.
+        </p>
 
-      <div className="grid gap-4 max-w-2xl mx-auto">
-        {youtubeVideos.map((url, i) => (
-          <Card key={i} className="border-border border rounded-xl shadow">
-            <CardContent className="p-4">
-              <div className="aspect-video w-full rounded-lg overflow-hidden">
-                <iframe
-                  className="w-full h-full"
-                  src={url}
-                  title={`Vídeo ${i + 1}`}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+        <div className="grid gap-4 max-w-2xl mx-auto pb-20">
+          {youtubeVideos.map((url, i) => (
+            <Card key={i} className="border-border border rounded-xl shadow">
+              <CardContent className="p-4">
+                <div className="aspect-video w-full rounded-lg overflow-hidden">
+                  <iframe
+                    className="w-full h-full"
+                    src={url}
+                    title={`Vídeo ${i + 1}`}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
 
-      {/* BOTÃO FLUTUANTE COM PATA DE GATO */}
+      {/* BOTÃO FLUTUANTE FORA DO BLOCO PRINCIPAL */}
       <button
         onClick={scrollToBottom}
         className="
@@ -73,11 +74,12 @@ const VideosTab = () => {
           flex
           items-center
           justify-center
+          z-50
         "
       >
         <Paw className="w-6 h-6" />
       </button>
-    </div>
+    </>
   );
 };
 
