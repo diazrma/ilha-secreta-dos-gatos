@@ -40,7 +40,7 @@ const letters = [
   {
     id: 1,
     title: "Para começar...",
-    content: `Aninha posso te chamar assim ?
+    content: `Aninha, posso te chamar assim ?
 
 Se você está lendo isso, é porque de alguma forma nossas conversas, nossos gatinhos e nossas risadas pelo WhatsApp criaram algo especial.
 
