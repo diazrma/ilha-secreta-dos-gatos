@@ -3,6 +3,14 @@ import { Video } from 'lucide-react';
 import catSleeping from '@/assets/cat-sleeping.png';
 
 const VideosTab = () => {
+  const videos = [
+    "/videos/video1.mp4",
+    "/videos/video2.mp4",
+    "/videos/video3.mp4",
+    "/videos/video4.mp4",
+    "/videos/video5.mp4",
+  ];
+
   return (
     <div className="animate-fade-in text-center">
       <img 
@@ -15,16 +23,20 @@ const VideosTab = () => {
         Vídeos Especiais
       </h2>
       <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-        Milkinha está preparando vídeos muito especiais para você...
-        Volte em breve! 🐱
+       Esse gatinho deixou alguns vídeos muito especiais para você.
+       Assista novamente quando quiser! 🐱💖
+       Em breve chegarão novos vídeos
       </p>
 
       <div className="grid gap-4 max-w-2xl mx-auto">
-        {[1, 2, 3].map((i) => (
-          <Card key={i} className="border-border border-dashed opacity-50">
-            <CardContent className="p-8 flex items-center justify-center gap-3 text-muted-foreground">
-              <Video className="w-6 h-6" />
-              <span>Vídeo {i} - Em breve</span>
+        {videos.map((src, i) => (
+          <Card key={i} className="border-border border rounded-xl shadow">
+            <CardContent className="p-4">
+              <video 
+                src={src} 
+                controls 
+                className="w-full rounded-lg"
+              />
             </CardContent>
           </Card>
         ))}
