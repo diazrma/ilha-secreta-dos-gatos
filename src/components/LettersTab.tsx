@@ -60,7 +60,7 @@ Mesmo à distância, sinto que existe uma conexão leve, gostosa, diferente. Voc
 
 Adoro nossos papos aleatórios, nossos planos meio doidos e até as conversas sobre casamento.
 
-Quem diria que Belém e Brusque poderiam se aproximar desse jeito?
+Quem diria que Belém - PA e Brusque - SC poderiam se aproximar desse jeito?
 
 Com carinho,
 Rodrigo 🐱💕`
