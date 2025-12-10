@@ -129,7 +129,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="py-6 text-center text-muted-foreground text-sm">
         <p>Feito com 💕 para você</p>
-        <p>Copyright © Rodrigo Cardoso</p>
+        <p className="mt-2">Copyright © Rodrigo Cardoso</p>
       </footer>
     </div>
   );
