@@ -1,6 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
 import catSleeping from '@/assets/cat-sleeping.png';
-import { Paw } from "lucide-react";
 
 const VideosTab = () => {
   const youtubeVideos = [
@@ -11,6 +10,7 @@ const VideosTab = () => {
     "https://www.youtube.com/embed/XH70G6bKbAY",
   ];
 
+  // Função para ir até o final
   const scrollToBottom = () => {
     window.scrollTo({
       top: document.body.scrollHeight,
@@ -57,7 +57,7 @@ const VideosTab = () => {
         </div>
       </div>
 
-      {/* BOTÃO FLUTUANTE FORA DO BLOCO PRINCIPAL */}
+      {/* BOTÃO FLUTUANTE COM PATA */}
       <button
         onClick={scrollToBottom}
         className="
@@ -77,7 +77,15 @@ const VideosTab = () => {
           z-50
         "
       >
-        <Paw className="w-6 h-6" />
+        {/* ÍCONE DE PATA VIA SVG */}
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          viewBox="0 0 24 24" 
+          fill="currentColor" 
+          className="w-6 h-6"
+        >
+          <path d="M11.5 12c-2.5 0-4.5 2-4.5 4.5S9 21 11.5 21s4.5-2 4.5-4.5S14 12 11.5 12zm-5-1.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm10 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-6-2c.8 0 1.5-.9 1.5-2S11.3 4 10.5 4 9 4.9 9 6s.7 2 1.5 2zm4 0c.8 0 1.5-.9 1.5-2s-.7-2-1.5-2-1.5.9-1.5 2 .7 2 1.5 2z"/>
+        </svg>
       </button>
     </>
   );
