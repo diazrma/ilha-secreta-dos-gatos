@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Lock, Mail, MailOpen, Heart, ArrowLeft } from 'lucide-react';
+import { Lock, Mail, MailOpen, Heart, ArrowLeft, Printer, Share2 } from 'lucide-react';
 import catLetter from '@/assets/cat-letter.png';
+import { Textarea } from '@/components/ui/textarea'; // Assumindo que você tem um componente Textarea
 
 interface LettersTabProps {
   firstVisitDate: Date;
@@ -89,7 +91,6 @@ Rodrigo 🐱💕`
 Às vezes imagino como seria quando finalmente nos encontrarmos. Como vai ser ouvir sua voz sem fone, ver seu sorriso de pertinho, rir das nossas próprias piadas cara a cara.
 
 Sonho com o dia em que a distância vai ser só uma lembrança engraçada de como tudo começou: com gatos, mensagens e um flerte despretensioso.
-
 Talvez a gente viaje, talvez tome um café juntos, talvez simplesmente fique em silêncio confortável olhando nossos celulares cheios de fotos de gatos.
 
 Mas uma coisa eu sei: quero viver esses momentos com você.
@@ -125,6 +126,57 @@ P.S.: Ainda vou te mandar muitas fotos de gatos, então isso aqui é só o come�
  */
 const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
   const [selectedLetter, setSelectedLetter] = useState<number | null>(null);
+  const [customLetters, setCustomLetters] = useState(letters);
+  const [readLetters, setReadLetters] = useState<number[]>([]); // IDs das cartas lidas
+
+  const handleDownloadTxt = () => {
+    if (readLetters.length === 0) return; // Garante que só funciona se houver recados lidos
+
+    const content = customLetters
+      .filter((letter) => readLetters.includes(letter.id)) // Apenas cartas lidas
+      .map((letter) => `Título: ${letter.title}\nConteúdo:\n${letter.content}\n\n`)
+      .join("");
+    const blob = new Blob([content], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "recados-lidos.txt";
+    link.click();
+
+    URL.revokeObjectURL(url);
+  };
+
+  const handleLetterRead = (id: number) => {
+    if (!readLetters.includes(id)) {
+      setReadLetters([...readLetters, id]);
+    }
+  };
+
+  const handlePrint = (letter: { title: string; content: string }) => {
+    const printWindow = window.open("", "_blank");
+    if (printWindow) {
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>${letter.title}</title>
+          </head>
+          <body>
+            <h1>${letter.title}</h1>
+            <p>${letter.content.replace(/\n/g, "<br>")}</p>
+          </body>
+        </html>
+      `);
+      printWindow.document.close();
+      printWindow.print();
+    }
+  };
+
+  const handleShareWhatsApp = (letter: { title: string; content: string }) => {
+    const message = `*${letter.title}*\n\n${letter.content}`;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank");
+  };
 
   const getDaysAvailable = () => {
     const now = new Date();
@@ -168,7 +220,8 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
 
 
   if (selectedLetter !== null) {
-    const letter = letters[selectedLetter];
+    const letter = customLetters[selectedLetter];
+    handleLetterRead(letter.id); // Marca a carta como lida
 
     return (
       <div className="animate-fade-in">
@@ -236,7 +289,7 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
       </div>
 
       <div className="grid gap-4 max-w-2xl mx-auto">
-        {letters.map((letter, index) => {
+        {customLetters.map((letter, index) => {
           const available = isLetterAvailable(index);
           const daysLeft = getDaysUntilUnlock(index);
 
@@ -248,14 +301,19 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
                   ? 'cursor-pointer hover:shadow-card hover:scale-[1.02] hover:border-primary/50' 
                   : 'opacity-60'
                 }`}
-              onClick={() => available && setSelectedLetter(index)}
+              onClick={() => available && setSelectedLetter(index)} // Adicionado evento de clique no Card
             >
               <CardContent className="p-4 flex items-center gap-4">
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center
-                  ${available 
-                    ? 'bg-primary/10 text-primary' 
-                    : 'bg-muted text-muted-foreground'
-                  }`}
+                <div 
+                  className={`w-12 h-12 rounded-full flex items-center justify-center
+                    ${available 
+                      ? 'bg-primary/10 text-primary cursor-pointer' 
+                      : 'bg-muted text-muted-foreground'
+                    }`}
+                  onClick={(e) => {
+                    e.stopPropagation(); // Impede que o clique na div propague para o Card
+                    available && setSelectedLetter(index);
+                  }}
                 >
                   {available ? (
                     <MailOpen className="w-6 h-6" />
@@ -266,7 +324,7 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
 
                 <div className="flex-1">
                   <h3 className={`font-medium ${available ? 'text-foreground' : 'text-muted-foreground'}`}>
-                    Carta {index + 1}: {letter.title}
+                    Carta {index + 1}
                   </h3>
                   <p className="text-sm text-muted-foreground">
                     {available 
@@ -277,12 +335,57 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
                 </div>
 
                 {available && (
-                  <Mail className="w-5 h-5 text-primary" />
+                  <>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Impede que o clique no botão propague para o Card
+                        setSelectedLetter(index);
+                      }}
+                      className="p-2"
+                    >
+                      <Mail className="w-5 h-5 text-primary" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Impede que o clique no botão propague para o Card
+                        handlePrint(letter);
+                      }}
+                      className="p-2"
+                    >
+                      <Printer className="w-5 h-5 text-primary" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Impede que o clique no botão propague para o Card
+                        handleShareWhatsApp(letter);
+                      }}
+                      className="p-2"
+                    >
+                      <Share2 className="w-5 h-5 text-primary" />
+                    </Button>
+                  </>
                 )}
               </CardContent>
             </Card>
           );
         })}
+      </div>
+
+      {/* Botão para baixar recados lidos */}
+      <div className="max-w-2xl mx-auto mt-8">
+        <Button 
+          onClick={handleDownloadTxt} 
+          className={`w-full ${readLetters.length === 0 ? 'opacity-50 cursor-not-allowed' : ''}`} 
+          disabled={readLetters.length === 0} // Desabilita se nenhuma carta foi lida
+        >
+          Baixar Recados Lidos (.txt)
+        </Button>
       </div>
     </div>
   );
