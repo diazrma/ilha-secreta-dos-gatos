@@ -15,7 +15,7 @@ const VideosTab = () => {
         Vídeos Especiais
       </h2>
       <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-        Este gatinho está preparando vídeos muito especiais para você...
+        Milkinha está preparando vídeos muito especiais para você...
         Volte em breve! 🐱
       </p>
 
