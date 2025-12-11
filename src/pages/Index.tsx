@@ -7,6 +7,7 @@ import LettersTab from '@/components/LettersTab';
 import VideosTab from '@/components/VideosTab';
 import GalleryTab from '@/components/GalleryTab';
 import catWelcome from '@/assets/cat-welcome.png';
+import milkinha from '@/assets/milkinha.png';
 
 const STORAGE_KEY = 'ilha-dos-gatos';
 
@@ -125,6 +126,13 @@ const Index = () => {
           </TabsContent>
         </Tabs>
       </main>
+
+        {/* Milkinha no canto inferior direito */}
+      <img 
+        src={milkinha}
+        alt="Milkinha"
+        className="fixed bottom-4 right-4 w-28 h-28 opacity-90 pointer-events-none select-none drop-shadow-lg"
+      />
 
       {/* Footer */}
       <footer className="py-6 text-center text-muted-foreground text-sm">
