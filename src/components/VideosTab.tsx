@@ -7,7 +7,7 @@ const VideosTab = () => {
     "https://www.youtube.com/embed/JREvTjMvhdo",
     "https://www.youtube.com/embed/RIDhssvCZss",
     "https://www.youtube.com/embed/ISWS3pnvRC4",
-    "https://www.youtube.com/embed/XH70G6bKbAY",
+    "https://www.youtube.com/embed/XBjgeHwwUGw",
   ];
 
   // Função para ir até o final
