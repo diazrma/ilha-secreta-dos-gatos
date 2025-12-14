@@ -204,6 +204,7 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
 
     const day = TEST_MODE ? TEST_DAY : now.getDate();
     const month = TEST_MODE ? TEST_MONTH : now.getMonth() + 1;
+    const year = now.getFullYear();
    
     if (day === 14 && month === 12 && year === 2025) {
         return `💙 Aninha, hoje nossa ilha tá um pouco diferente.
