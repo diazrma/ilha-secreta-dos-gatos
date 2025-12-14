@@ -205,6 +205,12 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
     const day = TEST_MODE ? TEST_DAY : now.getDate();
     const month = TEST_MODE ? TEST_MONTH : now.getMonth() + 1;
 
+     if (day === 14 && month === 12 && year === 2025) {
+    return "💙 Aninha, hoje nossa ilha tá um pouco diferente.
+    Adicionei três fotos na galeria que, de alguma forma, nos conectam.
+    O que eu mais gosto em você é o seu amor pela Milka, os memes e o seu jeito único 🐱✨";
+  }
+
     if (day === 25 && month === 12) {
       return "🎄 Feliz Natal, Aninha! Que seu dia seja leve, cheio de carinho, amor e cercado de boas energias (e muitos miadinhos 🐾)";
     }
