@@ -208,7 +208,7 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
    
     if (day === 14 && month === 12 && year === 2025) {
         return `💙 Aninha, hoje nossa ilha tá um pouco diferente.
-      Adicionei três fotos na galeria pequenos detalhes que, de alguma forma, nos conectam.
+      Adicionei quatro fotos na galeria pequenos detalhes que, de alguma forma, nos conectam.
       
       O que eu mais gosto em você é o seu amor pela Milka, os memes
       e o seu jeito único, com gostos tão pessoais e sinceros 🐱✨`;
