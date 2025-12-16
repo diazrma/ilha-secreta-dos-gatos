@@ -74,7 +74,7 @@ Rodrigo 🐱💕`
 
 Você representa uma parte bonita dos meus dias. Uma notificação que me faz sorrir. Uma conversa que eu espero. Um brilho diferente na rotina.
 
-Mesmo sem ter te conhecido pessoalmente ainda, você já é especial pra mim. Pela forma como fala, pela maneira que cuida dos seus gatinhos, pelo seu jeitinho doce e sincero.
+Mesmo sem ter te conhecido pessoalmente ainda, você já é especial pra mim. Pela forma como fala, pela maneira que cuida da sua gatinha e com a sua família, pelo seu jeitinho doce e sincero.
 
 Você me faz sonhar com possibilidades, encontros, abraços futuros e histórias que ainda vamos viver.
 
