@@ -4,49 +4,24 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Lock, Mail, MailOpen, Heart, ArrowLeft, Printer, Share2 } from 'lucide-react';
 import catLetter from '@/assets/cat-letter.png';
-import { Textarea } from '@/components/ui/textarea'; // Assumindo que você tem um componente Textarea
 
 interface LettersTabProps {
   firstVisitDate: Date;
 }
 
-/**
- * =======================
- * 🔧 CONFIGURAÇÃO DO TESTE
- * =======================
- */
-
-// false = usa data real
-// true = força data definida abaixo
 const TEST_MODE = false;
+const TEST_DAY = 31;
+const TEST_MONTH = 12;
 
-const TEST_DAY = 31;   // Natal = 25
-const TEST_MONTH = 12; // Dezembro = 12
-
-// Ano Novo:
-// const TEST_DAY = 31;
-// const TEST_MONTH = 12;
-
-// const TEST_DAY = 1;
-// const TEST_MONTH = 1;
-
-
-/**
- * =======================
- * ✉️ CARTAS
- * =======================
- */
 const letters = [
   {
     id: 1,
     title: "Para começar...",
-    content: `Aninha, posso te chamar assim ?
+    content: `Aninha,
 
 Se você está lendo isso, é porque de alguma forma nossas conversas, nossos gatinhos e nossas risadas pelo WhatsApp criaram algo especial.
 
-Mesmo sem estarmos no mesmo lugar, senti vontade de guardar aqui alguns pedacinhos dos meus pensamentos para você. Como se essa página fosse uma extensão do que a gente já compartilha em mensagens, áudios e fotos fofas de gato.
-
-Cada carta aqui é um carinho em forma de palavras. Um recado para você, de mim, do jeitinho que sei fazer.
+Mesmo sem estarmos no mesmo lugar, senti vontade de guardar aqui alguns pedacinhos dos meus pensamentos para você.
 
 Com carinho,
 Rodrigo 🐱💕`
@@ -56,13 +31,7 @@ Rodrigo 🐱💕`
     title: "Sobre nós dois",
     content: `Aninha,
 
-É engraçado pensar que tudo começou com gatos... e agora aqui estamos, conversando quase todos os dias, rindo, flertando e descobrindo coisas um sobre o outro.
-
-Mesmo à distância, sinto que existe uma conexão leve, gostosa, diferente. Você tem um jeito que acalma, diverte e ao mesmo tempo desperta minha curiosidade.
-
-Adoro nossos papos aleatórios, nossos planos meio doidos e até as conversas sobre casamento.
-
-Quem diria que Belém - PA e Brusque - SC poderiam se aproximar desse jeito?
+Mesmo à distância, sinto que existe uma conexão leve e gostosa entre nós. Você tem um jeito único que acalma e encanta.
 
 Com carinho,
 Rodrigo 🐱💕`
@@ -72,13 +41,7 @@ Rodrigo 🐱💕`
     title: "O que você representa",
     content: `Aninha,
 
-Você representa uma parte bonita dos meus dias. Uma notificação que me faz sorrir. Uma conversa que eu espero. Um brilho diferente na rotina.
-
-Mesmo sem ter te conhecido pessoalmente ainda, você já é especial pra mim. Pela forma como fala, pela maneira que cuida da sua gatinha e com a sua família, pelo seu jeitinho doce e sincero.
-
-Você me faz sonhar com possibilidades, encontros, abraços futuros e histórias que ainda vamos viver.
-
-Obrigado por existir e por ter cruzado meu caminho... nem que tenha sido através de uma tela.
+Você virou uma parte bonita dos meus dias. Obrigado por existir e ter cruzado meu caminho.
 
 Com carinho,
 Rodrigo 🐱💕`
@@ -88,12 +51,7 @@ Rodrigo 🐱💕`
     title: "Nossos sonhos",
     content: `Aninha,
 
-Às vezes imagino como seria quando finalmente nos encontrarmos. Como vai ser ouvir sua voz sem fone, ver seu sorriso de pertinho, rir das nossas próprias piadas cara a cara.
-
-Sonho com o dia em que a distância vai ser só uma lembrança engraçada de como tudo começou: com gatos, mensagens e um flerte despretensioso.
-Talvez a gente viaje, talvez tome um café juntos, talvez simplesmente fique em silêncio confortável olhando nossos celulares cheios de fotos de gatos.
-
-Mas uma coisa eu sei: quero viver esses momentos com você.
+Às vezes imagino o dia em que a distância será apenas uma lembrança do começo da nossa história.
 
 Com carinho,
 Rodrigo 🐱💕`
@@ -103,39 +61,36 @@ Rodrigo 🐱💕`
     title: "Para o que está por vir",
     content: `Aninha,
 
-Esta é a última carta por enquanto, mas a nossa história está só começando.
+Não sei onde tudo isso vai nos levar, mas a ideia de um "nós" me deixa feliz e esperançoso.
 
-Não sei exatamente onde ela vai nos levar, mas a ideia de um "nós" me deixa feliz, curioso e esperançoso.
+Com carinho,
+Rodrigo 🐱💕`
+  },
+  {
+    id: 6,
+    title: "Jogo da Milka",
+    content: `Aninha,
 
-Quero que você saiba que gosto de você de verdade. Do seu jeito, da sua companhia virtual que já virou parte importante dos meus dias.
+Eu precisava compartilhar isso com você: eu criei um jogo da Milkinha usando inteligência artificial 🤍
 
-E se um dia a gente realmente cumprir a promessa brincando sobre casamento… vai ser uma história linda pra contar: tudo começou com gatos.
-
-Com carinho e um sorriso bobo no rosto,
-Rodrigo 🐱💕
-
-P.S.: Ainda vou te mandar muitas fotos de gatos, então isso aqui é só o começo 🐾`
+Com carinho,
+Rodrigo 🐱💕`
   }
 ];
 
-
-/**
- * =======================
- * COMPONENTE
- * =======================
- */
 const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
   const [selectedLetter, setSelectedLetter] = useState<number | null>(null);
   const [customLetters, setCustomLetters] = useState(letters);
-  const [readLetters, setReadLetters] = useState<number[]>([]); // IDs das cartas lidas
+  const [readLetters, setReadLetters] = useState<number[]>([]);
 
   const handleDownloadTxt = () => {
-    if (readLetters.length === 0) return; // Garante que só funciona se houver recados lidos
+    if (readLetters.length === 0) return;
 
     const content = customLetters
-      .filter((letter) => readLetters.includes(letter.id)) // Apenas cartas lidas
+      .filter((letter) => readLetters.includes(letter.id))
       .map((letter) => `Título: ${letter.title}\nConteúdo:\n${letter.content}\n\n`)
       .join("");
+
     const blob = new Blob([content], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
 
@@ -158,9 +113,7 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
     if (printWindow) {
       printWindow.document.write(`
         <html>
-          <head>
-            <title>${letter.title}</title>
-          </head>
+          <head><title>${letter.title}</title></head>
           <body>
             <h1>${letter.title}</h1>
             <p>${letter.content.replace(/\n/g, "<br>")}</p>
@@ -186,66 +139,38 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
   };
 
   const daysAvailable = getDaysAvailable();
+  const isLetterAvailable = (index: number) => index < daysAvailable;
+  const getDaysUntilUnlock = (index: number) => index - daysAvailable + 1;
 
-  const isLetterAvailable = (index: number) => {
-    return index < daysAvailable;
-  };
-
-  const getDaysUntilUnlock = (index: number) => {
-    return index - daysAvailable + 1;
-  };
-
-
-  /**
-   * ✅ MENSAGEM DE NATAL / ANO NOVO
-   */
   const getHolidayMessage = () => {
     const now = new Date();
-
     const day = TEST_MODE ? TEST_DAY : now.getDate();
     const month = TEST_MODE ? TEST_MONTH : now.getMonth() + 1;
-    const year = now.getFullYear();
-   
-    if (day === 14 && month === 12 && year === 2025) {
-        return `💙 Aninha, hoje nossa ilha tá um pouco diferente.
-      Adicionei quatro fotos na galeria pequenos detalhes que, de alguma forma, nos conectam.
-      
-      O que eu mais gosto em você é o seu amor pela Milka, os memes
-      e o seu jeito único, com gostos tão pessoais e sinceros 🐱✨`;
-    }
 
-    if (day === 25 && month === 12) {
-      return "🎄 Feliz Natal, Aninha! Que seu dia seja leve, cheio de carinho, amor e cercado de boas energias (e muitos miadinhos 🐾)";
-    }
-
-    if ((day === 31 && month === 12) || (day === 1 && month === 1)) {
-      return "🎆 Feliz Ano Novo, Aninha! Que esse novo ano nos aproxime ainda mais, traga encontros, sorrisos, saúde, amor e momentos inesquecíveis pra nós dois 🐱💖";
-    }
+    if (day === 25 && month === 12)
+      return "🎄 Feliz Natal, Aninha!";
+    if ((day === 31 && month === 12) || (day === 1 && month === 1))
+      return "🎆 Feliz Ano Novo, Aninha!";
 
     return null;
   };
 
   const holidayMessage = getHolidayMessage();
 
-
   if (selectedLetter !== null) {
     const letter = customLetters[selectedLetter];
-    handleLetterRead(letter.id); // Marca a carta como lida
+    handleLetterRead(letter.id);
 
     return (
       <div className="animate-fade-in">
-        <Button 
-          variant="ghost" 
-          onClick={() => setSelectedLetter(null)}
-          className="mb-4 text-muted-foreground hover:text-foreground"
-        >
+        <Button variant="ghost" onClick={() => setSelectedLetter(null)} className="mb-4">
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Voltar aos recados
+          Voltar
         </Button>
 
         <Card className="max-w-2xl mx-auto shadow-card border-border overflow-hidden">
           <div className="bg-secondary/30 p-4 border-b border-border">
-            <h3 className="text-xl font-handwritten text-primary flex items-center gap-2">
+            <h3 className="text-xl font-handwritten flex items-center gap-2">
               <Heart className="w-5 h-5 fill-primary" />
               {letter.title}
             </h3>
@@ -253,9 +178,21 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
 
           <CardContent className="p-0">
             <div className="letter-paper p-6 min-h-[400px]">
-              <p className="font-handwritten text-xl leading-relaxed text-foreground whitespace-pre-line">
+              <p className="font-handwritten text-xl leading-relaxed whitespace-pre-line">
                 {letter.content}
               </p>
+
+              {/* BOTÃO DO JOGO 🎮 */}
+              {letter.id === 6 && (
+                <div className="mt-6 flex justify-center">
+                  <Button
+                    onClick={() => window.open("https://milkinha-love-quest.vercel.app/", "_blank")}
+                    className="bg-primary text-white px-6 py-2 rounded-full text-lg hover:scale-105 transition"
+                  >
+                    🎮 Jogar Milkinha Love Quest
+                  </Button>
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>
@@ -263,38 +200,20 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
     );
   }
 
-
   return (
     <div className="animate-fade-in">
-
-      {/* ✅ MENSAGEM DE NATAL / ANO NOVO */}
       {holidayMessage && (
         <Card className="max-w-2xl mx-auto mb-6 shadow-card border-primary/40 bg-primary/5">
           <CardContent className="p-6 text-center">
-            <p className="font-handwritten text-xl text-primary">
-              {holidayMessage}
-            </p>
-            {TEST_MODE && (
-              <p className="text-xs text-muted-foreground mt-2">
-                ⚠️ Modo teste ativo ({TEST_DAY}/{TEST_MONTH})
-              </p>
-            )}
+            <p className="font-handwritten text-xl text-primary">{holidayMessage}</p>
           </CardContent>
         </Card>
       )}
 
       <div className="text-center mb-8">
-        <img 
-          src={catLetter} 
-          alt="Gatinho com carta" 
-          className="w-28 h-28 mx-auto mb-4"
-        />
-        <h2 className="text-3xl font-handwritten text-gradient mb-2">
-          Seus Recados Especiais
-        </h2>
-        <p className="text-muted-foreground">
-          {daysAvailable} de 5 cartas disponíveis • Uma nova carta por dia
-        </p>
+        <img src={catLetter} className="w-28 h-28 mx-auto mb-4" />
+        <h2 className="text-3xl font-handwritten mb-2">Seus Recados</h2>
+        <p>{daysAvailable} de 5 cartas disponíveis</p>
       </div>
 
       <div className="grid gap-4 max-w-2xl mx-auto">
@@ -303,80 +222,33 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
           const daysLeft = getDaysUntilUnlock(index);
 
           return (
-            <Card 
+            <Card
               key={letter.id}
-              className={`transition-all duration-300 border-border
-                ${available 
-                  ? 'cursor-pointer hover:shadow-card hover:scale-[1.02] hover:border-primary/50' 
-                  : 'opacity-60'
-                }`}
-              onClick={() => available && setSelectedLetter(index)} // Adicionado evento de clique no Card
+              className={`transition-all ${available ? 'cursor-pointer hover:scale-[1.02]' : 'opacity-60'}`}
+              onClick={() => available && setSelectedLetter(index)}
             >
               <CardContent className="p-4 flex items-center gap-4">
-                <div 
-                  className={`w-12 h-12 rounded-full flex items-center justify-center
-                    ${available 
-                      ? 'bg-primary/10 text-primary cursor-pointer' 
-                      : 'bg-muted text-muted-foreground'
-                    }`}
-                  onClick={(e) => {
-                    e.stopPropagation(); // Impede que o clique na div propague para o Card
-                    available && setSelectedLetter(index);
-                  }}
-                >
-                  {available ? (
-                    <MailOpen className="w-6 h-6" />
-                  ) : (
-                    <Lock className="w-5 h-5" />
-                  )}
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${available ? 'bg-primary/10 text-primary' : 'bg-muted'}`}>
+                  {available ? <MailOpen /> : <Lock />}
                 </div>
 
                 <div className="flex-1">
-                  <h3 className={`font-medium ${available ? 'text-foreground' : 'text-muted-foreground'}`}>
-                    Carta {index + 1}
-                  </h3>
+                  <h3>Carta {index + 1}</h3>
                   <p className="text-sm text-muted-foreground">
-                    {available 
-                      ? 'Clique para ler' 
-                      : `Disponível em ${daysLeft} dia${daysLeft > 1 ? 's' : ''}`
-                    }
+                    {available ? 'Clique para ler' : `Disponível em ${daysLeft} dia(s)`}
                   </p>
                 </div>
 
                 {available && (
                   <>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={(e) => {
-                        e.stopPropagation(); // Impede que o clique no botão propague para o Card
-                        setSelectedLetter(index);
-                      }}
-                      className="p-2"
-                    >
-                      <Mail className="w-5 h-5 text-primary" />
+                    <Button variant="ghost" size="sm">
+                      <Mail />
                     </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={(e) => {
-                        e.stopPropagation(); // Impede que o clique no botão propague para o Card
-                        handlePrint(letter);
-                      }}
-                      className="p-2"
-                    >
-                      <Printer className="w-5 h-5 text-primary" />
+                    <Button variant="ghost" size="sm" onClick={(e) => { e.stopPropagation(); handlePrint(letter); }}>
+                      <Printer />
                     </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={(e) => {
-                        e.stopPropagation(); // Impede que o clique no botão propague para o Card
-                        handleShareWhatsApp(letter);
-                      }}
-                      className="p-2"
-                    >
-                      <Share2 className="w-5 h-5 text-primary" />
+                    <Button variant="ghost" size="sm" onClick={(e) => { e.stopPropagation(); handleShareWhatsApp(letter); }}>
+                      <Share2 />
                     </Button>
                   </>
                 )}
@@ -386,12 +258,11 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
         })}
       </div>
 
-      {/* Botão para baixar recados lidos */}
       <div className="max-w-2xl mx-auto mt-8">
-        <Button 
-          onClick={handleDownloadTxt} 
-          className={`w-full ${readLetters.length === 0 ? 'opacity-50 cursor-not-allowed' : ''}`} 
-          disabled={readLetters.length === 0} // Desabilita se nenhuma carta foi lida
+        <Button
+          onClick={handleDownloadTxt}
+          disabled={readLetters.length === 0}
+          className="w-full"
         >
           Baixar Recados Lidos (.txt)
         </Button>
