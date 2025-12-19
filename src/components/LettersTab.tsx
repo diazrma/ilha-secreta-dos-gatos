@@ -139,8 +139,19 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
   };
 
   const daysAvailable = getDaysAvailable();
-  const isLetterAvailable = (index: number) => index < daysAvailable;
-  const getDaysUntilUnlock = (index: number) => index - daysAvailable + 1;
+
+  // 🔓 Carta 6 sempre disponível
+  const isLetterAvailable = (index: number) => {
+    const letter = customLetters[index];
+    if (letter.id === 6) return true;
+    return index < daysAvailable;
+  };
+
+  const getDaysUntilUnlock = (index: number) => {
+    const letter = customLetters[index];
+    if (letter.id === 6) return 0;
+    return index - daysAvailable + 1;
+  };
 
   const getHolidayMessage = () => {
     const now = new Date();
@@ -182,7 +193,6 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
                 {letter.content}
               </p>
 
-              {/* BOTÃO DO JOGO 🎮 */}
               {letter.id === 6 && (
                 <div className="mt-6 flex justify-center">
                   <Button
@@ -235,7 +245,9 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
                 <div className="flex-1">
                   <h3>Carta {index + 1}</h3>
                   <p className="text-sm text-muted-foreground">
-                    {available ? 'Clique para ler' : `Disponível em ${daysLeft} dia(s)`}
+                    {available
+                      ? 'Clique para ler'
+                      : `Disponível em ${daysLeft} dia(s)`}
                   </p>
                 </div>
 
