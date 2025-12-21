@@ -12,18 +12,13 @@ const TEST_MODE = false;
 const TEST_DAY = 31;
 const TEST_MONTH = 12;
 
-// cartas que aparecem mesmo bloqueadas
-const ALWAYS_VISIBLE = [6, 7];
-
 const letters = [
   {
     id: 1,
     title: "Para começar...",
     content: `Aninha,
 
-Se você está lendo isso, é porque de alguma forma nossas conversas, nossos gatinhos e nossas risadas pelo WhatsApp criaram algo especial.
-
-Mesmo sem estarmos no mesmo lugar, senti vontade de guardar aqui alguns pedacinhos dos meus pensamentos para você.
+Se você está lendo isso, é porque de alguma forma nossas conversas criaram algo especial.
 
 Com carinho,
 Rodrigo 🐱💕`
@@ -33,7 +28,7 @@ Rodrigo 🐱💕`
     title: "Sobre nós dois",
     content: `Aninha,
 
-Mesmo à distância, sinto que existe uma conexão leve e gostosa entre nós. Você tem um jeito único que acalma e encanta.
+Mesmo à distância, sinto uma conexão leve e gostosa entre nós.
 
 Com carinho,
 Rodrigo 🐱💕`
@@ -43,7 +38,7 @@ Rodrigo 🐱💕`
     title: "O que você representa",
     content: `Aninha,
 
-Você virou uma parte bonita dos meus dias. Obrigado por existir e ter cruzado meu caminho.
+Você virou uma parte bonita dos meus dias.
 
 Com carinho,
 Rodrigo 🐱💕`
@@ -53,7 +48,7 @@ Rodrigo 🐱💕`
     title: "Nossos sonhos",
     content: `Aninha,
 
-Às vezes imagino o dia em que a distância será apenas uma lembrança do começo da nossa história.
+Às vezes imagino o dia em que a distância será só lembrança.
 
 Com carinho,
 Rodrigo 🐱💕`
@@ -63,7 +58,7 @@ Rodrigo 🐱💕`
     title: "Para o que está por vir",
     content: `Aninha,
 
-Não sei onde tudo isso vai nos levar, mas a ideia de um "nós" me deixa feliz e esperançoso.
+A ideia de um "nós" me deixa feliz.
 
 Com carinho,
 Rodrigo 🐱💕`
@@ -73,7 +68,7 @@ Rodrigo 🐱💕`
     title: "Jogo da Milka",
     content: `Aninha,
 
-Eu precisava compartilhar isso com você: eu criei um jogo da Milkinha usando inteligência artificial 🤍
+Criei um jogo da Milkinha usando IA 🤍
 
 Com carinho,
 Rodrigo 🐱💕`
@@ -83,17 +78,7 @@ Rodrigo 🐱💕`
     title: "Sobre objetivos",
     content: `Aninha,
 
-Sempre acreditei em objetivos e sempre mantive constância. Nem tudo acontece no tempo que a gente imagina, mas acredito que o mais importante é não desistir.
-
-Hoje sou grato pelo que construí: tenho minha casa e meu trabalho, e a maior conquista que tive foi o respeito das pessoas.
-
-Acredito fielmente na gente, mesmo com nossas diferenças. Todos temos defeitos, ninguém é perfeito e o mais importante é aprender a respeitar os limites. 🤍
-
-Espero que isso nunca atrapalhe a gente e que a gente sempre consiga atingir nossos objetivos, independente do tempo que leve.
-
-Quero ser teu porto seguro, quem vai proteger.
-
-Te desejo uma boa semana.
+Sempre acreditei em objetivos e constância.
 
 Com carinho,
 Rodrigo 🐱💕`
@@ -113,25 +98,15 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
 
   const daysAvailable = getDaysAvailable();
 
-  const isLetterVisible = (index: number) => {
-    const letter = letters[index];
-    if (ALWAYS_VISIBLE.includes(letter.id)) return true;
-    return index < daysAvailable;
-  };
-
   const canOpenLetter = (index: number) => {
-    const letter = letters[index];
-
     // carta 6 sempre abre
-    if (letter.id === 6) return true;
+    if (letters[index].id === 6) return true;
 
-    // carta 7 segue regra normal de dias
-    return index < daysAvailable;
-  };
+    // cartas 1–5 seguem dias
+    if (index < 5) return index < daysAvailable;
 
-  const getDaysUntilUnlock = (index: number) => {
-    if (index < daysAvailable) return 0;
-    return index - daysAvailable + 1;
+    // carta 7+ sempre pode abrir
+    return true;
   };
 
   const handleLetterRead = (id: number) => {
@@ -139,42 +114,6 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
       setReadLetters(prev => [...prev, id]);
     }
   };
-
-  const handlePrint = (letter: { title: string; content: string }) => {
-    const win = window.open('', '_blank');
-    if (!win) return;
-
-    win.document.write(`
-      <html>
-        <head><title>${letter.title}</title></head>
-        <body>
-          <h1>${letter.title}</h1>
-          <p>${letter.content.replace(/\n/g, '<br>')}</p>
-        </body>
-      </html>
-    `);
-    win.document.close();
-    win.print();
-  };
-
-  const handleShareWhatsApp = (letter: { title: string; content: string }) => {
-    const message = `*${letter.title}*\n\n${letter.content}`;
-    window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
-  };
-
-  const getHolidayMessage = () => {
-    const now = new Date();
-    const day = TEST_MODE ? TEST_DAY : now.getDate();
-    const month = TEST_MODE ? TEST_MONTH : now.getMonth() + 1;
-
-    if (day === 25 && month === 12) return "🎄 Feliz Natal, Aninha!";
-    if ((day === 31 && month === 12) || (day === 1 && month === 1))
-      return "🎆 Feliz Ano Novo, Aninha!";
-
-    return null;
-  };
-
-  const holidayMessage = getHolidayMessage();
 
   if (selectedLetter !== null) {
     const letter = letters[selectedLetter];
@@ -217,70 +156,43 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
 
   return (
     <div>
-      {holidayMessage && (
-        <Card className="max-w-2xl mx-auto mb-6">
-          <CardContent className="p-6 text-center">
-            <p>{holidayMessage}</p>
-          </CardContent>
-        </Card>
-      )}
-
       <div className="text-center mb-8">
         <img src={catLetter} className="w-28 h-28 mx-auto mb-4" />
         <h2 className="text-3xl mb-2">Seus Recados</h2>
-        <p>{daysAvailable} de {letters.length} cartas disponíveis</p>
       </div>
 
       <div className="grid gap-4 max-w-2xl mx-auto">
         {letters.map((letter, index) => {
-          const visible = isLetterVisible(index);
           const canOpen = canOpenLetter(index);
+          const isRead = readLetters.includes(letter.id);
 
           return (
             <Card
               key={letter.id}
-              className={`transition-all ${
-                visible ? 'cursor-pointer hover:scale-[1.02]' : 'opacity-60'
-              }`}
+              className="cursor-pointer transition-all hover:scale-[1.02]"
               onClick={() => canOpen && setSelectedLetter(index)}
             >
               <CardContent className="p-4 flex items-center gap-4">
                 <div className="w-12 h-12 flex items-center justify-center">
-                  {canOpen ? <MailOpen /> : <Lock />}
+                  {isRead ? <MailOpen /> : <Lock />}
                 </div>
 
                 <div className="flex-1">
                   <h3>Carta {index + 1}</h3>
                   <p className="text-sm">
-                    {canOpen
-                      ? 'Clique para ler'
-                      : `Disponível em ${getDaysUntilUnlock(index)} dia(s)`}
+                    {isRead ? 'Já lida' : 'Clique para abrir'}
                   </p>
                 </div>
 
-                {canOpen && (
+                {isRead && (
                   <>
                     <Button variant="ghost" size="sm">
                       <Mail />
                     </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={e => {
-                        e.stopPropagation();
-                        handlePrint(letter);
-                      }}
-                    >
+                    <Button variant="ghost" size="sm">
                       <Printer />
                     </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={e => {
-                        e.stopPropagation();
-                        handleShareWhatsApp(letter);
-                      }}
-                    >
+                    <Button variant="ghost" size="sm">
                       <Share2 />
                     </Button>
                   </>
