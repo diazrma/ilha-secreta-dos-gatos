@@ -77,9 +77,8 @@ Rodrigo 🐱💕`
     id: 7,
     title: "Akai Ito",
     content: `Aninha,
-
-    Aninha,
-    algumas coisas não precisam ser entendidas agora.
+    
+    Algumas coisas não precisam ser entendidas agora.
     Os japoneses chamam isso de Akai Ito.
     Boa semana.
     
