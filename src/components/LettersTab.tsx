@@ -12,6 +12,9 @@ const TEST_MODE = false;
 const TEST_DAY = 31;
 const TEST_MONTH = 12;
 
+// cartas sempre liberadas
+const ALWAYS_AVAILABLE = [6, 7];
+
 const letters = [
   {
     id: 1,
@@ -99,26 +102,27 @@ Rodrigo 🐱💕`
 
 const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
   const [selectedLetter, setSelectedLetter] = useState<number | null>(null);
-  const [customLetters] = useState(letters);
   const [readLetters, setReadLetters] = useState<number[]>([]);
 
-  const handleDownloadTxt = () => {
-    if (readLetters.length === 0) return;
+  const getDaysAvailable = () => {
+    const now = new Date();
+    const diffTime = Math.abs(now.getTime() - firstVisitDate.getTime());
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    return Math.min(diffDays + 1, letters.length);
+  };
 
-    const content = customLetters
-      .filter(letter => readLetters.includes(letter.id))
-      .map(letter => `Título: ${letter.title}\n\n${letter.content}\n\n`)
-      .join('');
+  const daysAvailable = getDaysAvailable();
 
-    const blob = new Blob([content], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
+  const isLetterAvailable = (index: number) => {
+    const letter = letters[index];
+    if (ALWAYS_AVAILABLE.includes(letter.id)) return true;
+    return index < daysAvailable;
+  };
 
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'recados-lidos.txt';
-    link.click();
-
-    URL.revokeObjectURL(url);
+  const getDaysUntilUnlock = (index: number) => {
+    const letter = letters[index];
+    if (ALWAYS_AVAILABLE.includes(letter.id)) return 0;
+    return index - daysAvailable + 1;
   };
 
   const handleLetterRead = (id: number) => {
@@ -149,27 +153,6 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
     window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
   };
 
-  const getDaysAvailable = () => {
-    const now = new Date();
-    const diffTime = Math.abs(now.getTime() - firstVisitDate.getTime());
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    return Math.min(diffDays + 1, customLetters.length);
-  };
-
-  const daysAvailable = getDaysAvailable();
-
-  const isLetterAvailable = (index: number) => {
-    const letter = customLetters[index];
-    if (letter.id === 6) return true;
-    return index < daysAvailable;
-  };
-
-  const getDaysUntilUnlock = (index: number) => {
-    const letter = customLetters[index];
-    if (letter.id === 6) return 0;
-    return index - daysAvailable + 1;
-  };
-
   const getHolidayMessage = () => {
     const now = new Date();
     const day = TEST_MODE ? TEST_DAY : now.getDate();
@@ -185,19 +168,19 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
   const holidayMessage = getHolidayMessage();
 
   if (selectedLetter !== null) {
-    const letter = customLetters[selectedLetter];
+    const letter = letters[selectedLetter];
     handleLetterRead(letter.id);
 
     return (
-      <div className="animate-fade-in">
+      <div>
         <Button variant="ghost" onClick={() => setSelectedLetter(null)} className="mb-4">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Voltar
         </Button>
 
-        <Card className="max-w-2xl mx-auto overflow-hidden">
+        <Card className="max-w-2xl mx-auto">
           <div className="p-4 border-b">
-            <h3 className="text-xl flex items-center gap-2">
+            <h3 className="flex items-center gap-2 text-xl">
               <Heart className="w-5 h-5 fill-primary" />
               {letter.title}
             </h3>
@@ -224,7 +207,7 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
   }
 
   return (
-    <div className="animate-fade-in">
+    <div>
       {holidayMessage && (
         <Card className="max-w-2xl mx-auto mb-6">
           <CardContent className="p-6 text-center">
@@ -236,11 +219,11 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
       <div className="text-center mb-8">
         <img src={catLetter} className="w-28 h-28 mx-auto mb-4" />
         <h2 className="text-3xl mb-2">Seus Recados</h2>
-        <p>{daysAvailable} de {customLetters.length} cartas disponíveis</p>
+        <p>{daysAvailable} de {letters.length} cartas disponíveis</p>
       </div>
 
       <div className="grid gap-4 max-w-2xl mx-auto">
-        {customLetters.map((letter, index) => {
+        {letters.map((letter, index) => {
           const available = isLetterAvailable(index);
           const daysLeft = getDaysUntilUnlock(index);
 
@@ -293,16 +276,6 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
             </Card>
           );
         })}
-      </div>
-
-      <div className="max-w-2xl mx-auto mt-8">
-        <Button
-          onClick={handleDownloadTxt}
-          disabled={readLetters.length === 0}
-          className="w-full"
-        >
-          Baixar Recados Lidos (.txt)
-        </Button>
       </div>
     </div>
   );
