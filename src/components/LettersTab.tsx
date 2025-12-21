@@ -75,7 +75,27 @@ Eu precisava compartilhar isso com você: eu criei um jogo da Milkinha usando in
 
 Com carinho,
 Rodrigo 🐱💕`
-  }
+  },
+{
+  id: 7,
+  title: "Sobre objetivos",
+  content: `Aninha,
+
+  Sempre acreditei em objetivos e sempre mantive constância. Nem tudo acontece no tempo que a gente imagina, mas acredito que o mais importante é não desistir.
+  
+  Hoje sou grato pelo que construí: tenho minha casa e meu trabalho, e a maior conquista que tive foi o respeito das pessoas.
+  
+  Acredito fielmente na gente, mesmo com nossas diferenças. Todos temos defeitos, ninguém é perfeito e o mais importante é aprender a respeitar os limites. 🤍
+  
+  Espero que isso nunca atrapalhe a gente e que a gente sempre consiga atingir nossos objetivos, independente do tempo que leve.
+  
+  Quero ser teu porto seguro, quem vai proteger.
+  
+  Te desejo uma boa semana.
+  
+  Com carinho,
+  Rodrigo  🐱💕`
+}
 ];
 
 const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
