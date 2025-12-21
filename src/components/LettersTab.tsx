@@ -11,43 +11,85 @@ interface LettersTabProps {
 const letters = [
   {
     id: 1,
-    title: 'Para começar...',
-    content: 'Conteúdo da carta 1'
+    title: "Para começar...",
+    content: `Aninha,
+
+Se você está lendo isso, é porque de alguma forma nossas conversas, nossos gatinhos e nossas risadas pelo WhatsApp criaram algo especial.
+
+Mesmo sem estarmos no mesmo lugar, senti vontade de guardar aqui alguns pedacinhos dos meus pensamentos para você.
+
+Com carinho,
+Rodrigo 🐱💕`
   },
   {
     id: 2,
-    title: 'Sobre nós dois',
-    content: 'Conteúdo da carta 2'
+    title: "Sobre nós dois",
+    content: `Aninha,
+
+Mesmo à distância, sinto que existe uma conexão leve e gostosa entre nós. Você tem um jeito único que acalma e encanta.
+
+Com carinho,
+Rodrigo 🐱💕`
   },
   {
     id: 3,
-    title: 'O que você representa',
-    content: 'Conteúdo da carta 3'
+    title: "O que você representa",
+    content: `Aninha,
+
+Você virou uma parte bonita dos meus dias. Obrigado por existir e ter cruzado meu caminho.
+
+Com carinho,
+Rodrigo 🐱💕`
   },
   {
     id: 4,
-    title: 'Nossos sonhos',
-    content: 'Conteúdo da carta 4'
+    title: "Nossos sonhos",
+    content: `Aninha,
+
+Às vezes imagino o dia em que a distância será apenas uma lembrança do começo da nossa história.
+
+Com carinho,
+Rodrigo 🐱💕`
   },
   {
     id: 5,
-    title: 'Para o que está por vir',
-    content: 'Conteúdo da carta 5'
+    title: "Para o que está por vir",
+    content: `Aninha,
+
+Não sei onde tudo isso vai nos levar, mas a ideia de um "nós" me deixa feliz e esperançoso.
+
+Com carinho,
+Rodrigo 🐱💕`
   },
   {
     id: 6,
-    title: 'Jogo da Milka',
-    content: 'Conteúdo da carta 6'
+    title: "Jogo da Milka",
+    content: `Aninha,
+
+Eu precisava compartilhar isso com você: eu criei um jogo da Milkinha usando inteligência artificial 🤍
+
+Com carinho,
+Rodrigo 🐱💕`
   },
   {
     id: 7,
-    title: 'Sobre objetivos',
-    content: 'Conteúdo da carta 7'
-  },
-  {
-    id: 8,
-    title: 'Mais adiante...',
-    content: 'Conteúdo da carta 8'
+    title: "Sobre objetivos",
+    content: `Aninha,
+
+Sempre acreditei em objetivos e sempre mantive constância. Nem tudo acontece no tempo que a gente imagina, mas acredito que o mais importante é não desistir.
+
+Hoje sou grato pelo que construí: tenho minha casa e meu trabalho, e a maior conquista que tive foi o respeito das pessoas.
+
+Acredito fielmente na gente, mesmo com nossas diferenças. Todos temos defeitos, ninguém é perfeito e o mais importante é aprender a respeitar os limites. 🤍
+
+Espero que isso nunca atrapalhe a gente e que a gente sempre consiga atingir nossos objetivos, independente do tempo que leve.
+
+Quero ser teu porto seguro, quem vai proteger.
+
+Te desejo uma boa semana.
+
+Com carinho,
+Rodrigo 🐱💕`
   }
 ];
 
