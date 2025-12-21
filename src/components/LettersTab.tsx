@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Mail, MailOpen, Heart, ArrowLeft } from 'lucide-react';
@@ -7,6 +7,8 @@ import catLetter from '@/assets/cat-letter.png';
 interface LettersTabProps {
   firstVisitDate: Date;
 }
+
+const STORAGE_KEY = 'opened_letters';
 
 const letters = [
   {
@@ -95,16 +97,30 @@ Rodrigo 🐱💕`
 
 const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
   const [selectedLetter, setSelectedLetter] = useState<number | null>(null);
-  const [readLetters, setReadLetters] = useState<number[]>([]);
+  const [openedLetters, setOpenedLetters] = useState<number[]>([]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      setOpenedLetters(JSON.parse(saved));
+    }
+  }, []);
 
   const openLetter = (index: number) => {
     const letterId = letters[index].id;
 
-    if (!readLetters.includes(letterId)) {
-      setReadLetters(prev => [...prev, letterId]);
+    if (!openedLetters.includes(letterId)) {
+      const updated = [...openedLetters, letterId];
+      setOpenedLetters(updated);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
     }
 
     setSelectedLetter(index);
+  };
+
+  const isLetterOpen = (letterId: number) => {
+    if (letterId <= 6) return true;
+    return openedLetters.includes(letterId);
   };
 
   if (selectedLetter !== null) {
@@ -146,9 +162,7 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
 
       <div className="grid gap-4 max-w-2xl mx-auto">
         {letters.map((letter, index) => {
-          const alwaysOpen = letter.id <= 6;
-          const wasRead = readLetters.includes(letter.id);
-          const isOpen = alwaysOpen || wasRead;
+          const open = isLetterOpen(letter.id);
 
           return (
             <Card
@@ -157,14 +171,17 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
               onClick={() => openLetter(index)}
             >
               <CardContent className="p-4 flex items-center gap-4">
-                <div className="w-12 h-12 flex items-center justify-center text-primary">
-                  {isOpen ? <MailOpen /> : <Mail />}
+                <div
+                  className="w-12 h-12 flex items-center justify-center"
+                  style={{ color: 'hsl(var(--primary))' }}
+                >
+                  {open ? <MailOpen /> : <Mail />}
                 </div>
 
                 <div>
                   <h3>Carta {index + 1}</h3>
                   <p className="text-sm text-muted-foreground">
-                    {isOpen ? 'Carta aberta' : 'Carta fechada'}
+                    {open ? 'Carta aberta' : 'Carta fechada'}
                   </p>
                 </div>
               </CardContent>
