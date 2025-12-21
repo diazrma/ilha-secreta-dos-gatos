@@ -12,8 +12,8 @@ const TEST_MODE = false;
 const TEST_DAY = 31;
 const TEST_MONTH = 12;
 
-// cartas sempre liberadas
-const ALWAYS_AVAILABLE = [6, 7];
+// cartas que aparecem mesmo bloqueadas
+const ALWAYS_VISIBLE = [6, 7];
 
 const letters = [
   {
@@ -113,15 +113,24 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
 
   const daysAvailable = getDaysAvailable();
 
-  const isLetterAvailable = (index: number) => {
+  const isLetterVisible = (index: number) => {
     const letter = letters[index];
-    if (ALWAYS_AVAILABLE.includes(letter.id)) return true;
+    if (ALWAYS_VISIBLE.includes(letter.id)) return true;
+    return index < daysAvailable;
+  };
+
+  const canOpenLetter = (index: number) => {
+    const letter = letters[index];
+
+    // carta 6 sempre abre
+    if (letter.id === 6) return true;
+
+    // carta 7 segue regra normal de dias
     return index < daysAvailable;
   };
 
   const getDaysUntilUnlock = (index: number) => {
-    const letter = letters[index];
-    if (ALWAYS_AVAILABLE.includes(letter.id)) return 0;
+    if (index < daysAvailable) return 0;
     return index - daysAvailable + 1;
   };
 
@@ -224,28 +233,32 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
 
       <div className="grid gap-4 max-w-2xl mx-auto">
         {letters.map((letter, index) => {
-          const available = isLetterAvailable(index);
-          const daysLeft = getDaysUntilUnlock(index);
+          const visible = isLetterVisible(index);
+          const canOpen = canOpenLetter(index);
 
           return (
             <Card
               key={letter.id}
-              className={available ? 'cursor-pointer' : 'opacity-60'}
-              onClick={() => available && setSelectedLetter(index)}
+              className={`transition-all ${
+                visible ? 'cursor-pointer hover:scale-[1.02]' : 'opacity-60'
+              }`}
+              onClick={() => canOpen && setSelectedLetter(index)}
             >
               <CardContent className="p-4 flex items-center gap-4">
                 <div className="w-12 h-12 flex items-center justify-center">
-                  {available ? <MailOpen /> : <Lock />}
+                  {canOpen ? <MailOpen /> : <Lock />}
                 </div>
 
                 <div className="flex-1">
                   <h3>Carta {index + 1}</h3>
                   <p className="text-sm">
-                    {available ? 'Clique para ler' : `Disponível em ${daysLeft} dia(s)`}
+                    {canOpen
+                      ? 'Clique para ler'
+                      : `Disponível em ${getDaysUntilUnlock(index)} dia(s)`}
                   </p>
                 </div>
 
-                {available && (
+                {canOpen && (
                   <>
                     <Button variant="ghost" size="sm">
                       <Mail />
