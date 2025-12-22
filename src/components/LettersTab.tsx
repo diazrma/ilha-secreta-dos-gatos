@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Mail, MailOpen, Heart, ArrowLeft } from 'lucide-react';
+import { Mail, MailOpen, Heart, ArrowLeft, Share2, Printer } from 'lucide-react';
 import catLetter from '@/assets/cat-letter.png';
 
 interface LettersTabProps {
@@ -9,6 +9,9 @@ interface LettersTabProps {
 }
 
 const STORAGE_KEY = 'opened_letters';
+
+const TEST_DAY: number | null = null;
+const TEST_MONTH: number | null = null;
 
 const letters = [
   {
@@ -87,6 +90,25 @@ Rodrigo 🐱💕`
   }
 ];
 
+const specialDates = [
+  {
+    day: 25,
+    month: 12,
+    message: `Feliz Natal, Aninha! 🎄✨
+
+Que essa data especial traga ainda mais alegria, amor e momentos inesquecíveis para você. Obrigado por ser uma luz tão bonita na minha vida.
+`,
+  },
+  {
+    day: 1,
+    month: 1,
+    message: `Feliz Ano Novo, Aninha! 🎆💖
+
+Que este ano seja cheio de realizações, sonhos e momentos felizes para você. Estou animado para ver o que o futuro nos reserva.
+`,
+  },
+];
+
 const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
   const [selectedLetter, setSelectedLetter] = useState<number | null>(null);
   const [openedLetters, setOpenedLetters] = useState<number[]>([]);
@@ -115,6 +137,52 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
     return openedLetters.includes(letterId);
   };
 
+  const getSpecialMessage = () => {
+    const today = new Date();
+
+    const day = TEST_DAY ?? today.getDate();
+    const month = TEST_MONTH ?? (today.getMonth() + 1);
+
+    const specialDate = specialDates.find(
+      (date) => date.day === day && date.month === month
+    );
+
+    if (specialDate) {
+      const isChristmas = specialDate.day === 25 && specialDate.month === 12;
+      return { message: specialDate.message, isChristmas };
+    }
+
+    return null;
+  };
+
+  const shareOnWhatsApp = (title: string, content: string) => {
+    const message = `${title}\n\n${content}`;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  const printLetter = (title: string, content: string) => {
+    const printWindow = window.open('', '_blank');
+    if (printWindow) {
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>${title}</title>
+          </head>
+          <body>
+            <h1>${title}</h1>
+            <p>${content.replace(/\n/g, '<br>')}</p>
+          </body>
+        </html>
+      `);
+      printWindow.document.close();
+      printWindow.print();
+    }
+  };
+
+  const specialMessageData = getSpecialMessage();
+
   if (selectedLetter !== null) {
     const letter = letters[selectedLetter];
 
@@ -139,6 +207,18 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
 
           <CardContent className="p-6 min-h-[350px] whitespace-pre-line text-lg">
             {letter.content}
+            {letter.id === 6 && (
+              <div className="mt-4 text-center">
+                <a
+                  href="https://milkinha-love-quest.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition"
+                >
+                  Acesse o Jogo da Milkinha
+                </a>
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>
@@ -151,6 +231,32 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
         <img src={catLetter} className="w-28 h-28 mx-auto mb-4" />
         <h2 className="text-3xl">Suas Cartas</h2>
       </div>
+
+      {specialMessageData && (
+        <div className="text-center mb-8 relative">
+          <div
+            className={`max-w-xl mx-auto p-6 rounded-lg shadow-card bg-card ${
+              specialMessageData.isChristmas ? "relative" : ""
+            }`}
+          >
+            {specialMessageData.isChristmas && (
+              <div className="absolute inset-0 flex justify-center items-center">
+                <div className="lights-container">
+                  {Array.from({ length: 10 }).map((_, index) => (
+                    <span
+                      key={index}
+                      className="light"
+                      style={{ animationDelay: `${index * 0.2}s` }}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+            <h2 className="text-3xl mb-4">{specialMessageData.message}</h2>
+            <p className="text-lg">Com carinho, Rodrigo 🐱💕</p>
+          </div>
+        </div>
+      )}
 
       <div className="grid gap-4 max-w-2xl mx-auto">
         {letters.map((letter, index) => {
@@ -171,12 +277,37 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
                 </div>
 
                 <div>
-                  <h3>Carta {index + 1}</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p
+                    className={`text-sm font-medium ${
+                      open
+                        ? 'text-[hsl(var(--coral))]'
+                        : 'text-muted-foreground'
+                    }`}
+                  >
                     {open ? 'Carta aberta' : 'Carta fechada'}
+                  </p>
+                  <p className="flex items-center gap-2 text-lg font-semibold text-primary">
+                    <Heart className="w-4 h-4 fill-primary text-primary" />
+                    {letter.title}
                   </p>
                 </div>
               </CardContent>
+              <div className="p-4 flex gap-4 justify-end">
+                <Button
+                  onClick={() => shareOnWhatsApp(letter.title, letter.content)}
+                  className="flex items-center gap-2 bg-[hsl(var(--coral))] text-white hover:bg-[hsl(var(--coral-light))]"
+                >
+                  <Share2 className="w-4 h-4" />
+             
+                </Button>
+                <Button
+                  onClick={() => printLetter(letter.title, letter.content)}
+                  className="flex items-center gap-2 bg-[hsl(var(--coral))] text-white hover:bg-[hsl(var(--coral-light))]"
+                >
+                  <Printer className="w-4 h-4" />
+               
+                </Button>
+              </div>
             </Card>
           );
         })}
