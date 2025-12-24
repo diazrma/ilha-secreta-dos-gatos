@@ -10,9 +10,13 @@ import img2 from '@/assets/2.png';
 import img3 from '@/assets/3.png';
 import img4 from '@/assets/4.png';
 import img7 from '@/assets/7.png';
+import img8 from  '@/assets/8.png';
+import img9 from '@/assets/9.jpeg';
+import img10 from '@/assets/10.jpeg';
+import img11 from '@/assets/11.jpeg';
 
 const GalleryTab = () => {
-  const images = [img1, img2, img3, img4, img7];
+  const images = [img1, img2, img3, img4, img7, img8, img9, img10, img11];
 
   const [open, setOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
