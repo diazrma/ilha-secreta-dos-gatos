@@ -10,7 +10,7 @@ import img2 from '@/assets/2.png';
 import img3 from '@/assets/3.png';
 import img4 from '@/assets/4.png';
 import img7 from '@/assets/7.png';
-import img8 from  '@/assets/8.jpeg';
+import img8 from '@/assets/8.jpeg';
 import img9 from '@/assets/9.jpeg';
 import img10 from '@/assets/10.jpeg';
 import img11 from '@/assets/11.jpeg';
@@ -44,28 +44,22 @@ const GalleryTab = () => {
         Aguarde! 💕
       </p>
 
-      {/* Grid */}
+      {/* Grid - agora mostra TODAS */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
-        {[...images, null, null, null].slice(0, 6).map((src, index) => (
+        {images.map((src, index) => (
           <Card
             key={index}
-            className={`aspect-square overflow-hidden ${
-              !src ? 'border-dashed opacity-50' : 'cursor-pointer'
-            }`}
+            className="aspect-square overflow-hidden cursor-pointer"
           >
             <CardContent className="p-0 h-full flex items-center justify-center">
-              {src ? (
-                <motion.img
-                  src={src}
-                  alt={`Memória ${index + 1}`}
-                  className="w-full h-full object-cover"
-                  whileHover={{ scale: 1.08 }}
-                  transition={{ duration: 0.3 }}
-                  onClick={() => handleOpen(src)}
-                />
-              ) : (
-                <Image className="w-8 h-8 text-muted-foreground" />
-              )}
+              <motion.img
+                src={src}
+                alt={`Memória ${index + 1}`}
+                className="w-full h-full object-cover"
+                whileHover={{ scale: 1.08 }}
+                transition={{ duration: 0.3 }}
+                onClick={() => handleOpen(src)}
+              />
             </CardContent>
           </Card>
         ))}
