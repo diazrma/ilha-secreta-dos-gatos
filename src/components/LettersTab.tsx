@@ -89,14 +89,17 @@ Rodrigo 🐱💕`
     Rodrigo 🐱💕`
   },
   {
-  id: 8,
-  title: "Lei da Atração",
-  content: `Aninha,
-  Você conhece a Lei da Atração? Existe um livro chamado O Segredo que explica exatamente como essa lei funciona. Ele mostra que tudo o que a gente pensa, sente e acredita com intensidade, o universo responde. Quando a gente foca em coisas boas, a vida começa a abrir caminhos. Nada é por acaso. Tudo que você vibra, você atrai. Então mentaliza, acredita e segue… porque coisas grandes acontecem para quem não tem medo de sonhar. 💫
+    id: 8,
+    title: "Porto Seguro",
+    content: `Aninha,
+    Às vezes a vida aperta, os pensamentos ficam pesados e o coração fica meio perdido tentando entender tudo. Mas eu quero que você saiba que não precisa enfrentar nada sozinha. A partir de agora, eu sou o seu porto seguro alguém para te apoiar, acalmar, ouvir e caminhar junto com você, no que vier.
   
-  Com carinho,
-  Rodrigo 🐱💕`
+    Você pode contar comigo.
+  
+    Com carinho,
+    Rodrigo 🐱💕`
   }
+
 ];
 
 const specialDates = [
