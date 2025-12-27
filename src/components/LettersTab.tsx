@@ -87,6 +87,15 @@ Rodrigo 🐱💕`
     
     Com carinho,
     Rodrigo 🐱💕`
+  },
+  {
+  id: 8,
+  title: "Lei da Atração",
+  content: `Aninha,
+  Você conhece a Lei da Atração? Existe um livro chamado O Segredo que explica exatamente como essa lei funciona. Ele mostra que tudo o que a gente pensa, sente e acredita com intensidade, o universo responde. Quando a gente foca em coisas boas, a vida começa a abrir caminhos. Nada é por acaso. Tudo que você vibra, você atrai. Então mentaliza, acredita e segue… porque coisas grandes acontecem para quem não tem medo de sonhar. 💫
+  
+  Com carinho,
+  Rodrigo 🐱💕`
   }
 ];
 
