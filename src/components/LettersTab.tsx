@@ -98,7 +98,30 @@ Rodrigo 🐱💕`
   
     Com carinho,
     Rodrigo 🐱💕`
-  }
+  },
+  {
+  id: 9,
+  title: "Ultimo recado do Ano 2025",
+  content: `Aninha,
+
+São cinco anos desde que te conheço.
+E foi só em 2025 que a vida nos permitiu, de verdade, nos aproximar.
+Mesmo com a distância, mesmo sem pressa, algo entre nós encontrou espaço para crescer.
+Ficou claro que é possível, que faz sentido, que pode ser.
+Se depender de mim, 2026 será o ano em que a gente segue junto,
+atravessando distâncias, sendo apoio um do outro, escolhendo ficar.
+
+Quando a gente começou a falar mais sobre nós, essa música passou a me acompanhar.
+Não era só uma canção, era um jeito silencioso de sentir você mais perto,
+de guardar o que eu ainda não sabia dizer.
+Por isso deixo ela aqui, do jeito que ficou pra mim:
+<a href="https://www.youtube.com/watch?v=Dg4YT__EgbM">Glass Heart - TENBLANK</a>
+
+
+Com carinho,
+Rodrigo 🐱💕`
+}
+
 
 ];
 
