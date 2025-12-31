@@ -100,9 +100,9 @@ Rodrigo 🐱💕`
     Rodrigo 🐱💕`
   },
   {
-  id: 9,
-  title: "Ultimo recado do Ano 2025",
-  content: `Aninha,
+    id: 9,
+    title: "Ultimo recado do Ano 2025",
+    content: `Aninha,
 
 São cinco anos desde que te conheço.
 E foi só em 2025 que a vida nos permitiu, de verdade, nos aproximar.
@@ -115,14 +115,13 @@ Quando a gente começou a falar mais sobre nós, essa música passou a me acompa
 Não era só uma canção, era um jeito silencioso de sentir você mais perto,
 de guardar o que eu ainda não sabia dizer.
 Por isso deixo ela aqui, do jeito que ficou pra mim:
-<a href="https://www.youtube.com/watch?v=Dg4YT__EgbM">Glass Heart - TENBLANK</a>
-
+<a href="https://www.youtube.com/watch?v=Dg4YT__EgbM" target="_blank" style="color:#ff4f6d; text-decoration:underline;">
+Glass Heart - TENBLANK
+</a>
 
 Com carinho,
 Rodrigo 🐱💕`
-}
-
-
+  }
 ];
 
 const specialDates = [
@@ -240,8 +239,13 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
             </h3>
           </div>
 
-          <CardContent className="p-6 min-h-[350px] whitespace-pre-line text-lg">
-            {letter.content}
+          <CardContent className="p-6 min-h-[350px] text-lg">
+            <div
+              dangerouslySetInnerHTML={{
+                __html: letter.content.replace(/\n/g, '<br>')
+              }}
+            />
+
             {letter.id === 6 && (
               <div className="mt-4 text-center">
                 <a
@@ -274,19 +278,6 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
               specialMessageData.isChristmas ? "relative" : ""
             }`}
           >
-            {specialMessageData.isChristmas && (
-              <div className="absolute inset-0 flex justify-center items-center">
-                <div className="lights-container">
-                  {Array.from({ length: 10 }).map((_, index) => (
-                    <span
-                      key={index}
-                      className="light"
-                      style={{ animationDelay: `${index * 0.2}s` }}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
             <h2 className="text-3xl mb-4">{specialMessageData.message}</h2>
             <p className="text-lg">Com carinho, Rodrigo 🐱💕</p>
           </div>
@@ -327,20 +318,20 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
                   </p>
                 </div>
               </CardContent>
+
               <div className="p-4 flex gap-4 justify-end">
                 <Button
                   onClick={() => shareOnWhatsApp(letter.title, letter.content)}
                   className="flex items-center gap-2 bg-[hsl(var(--coral))] text-white hover:bg-[hsl(var(--coral-light))]"
                 >
                   <Share2 className="w-4 h-4" />
-             
                 </Button>
+
                 <Button
                   onClick={() => printLetter(letter.title, letter.content)}
                   className="flex items-center gap-2 bg-[hsl(var(--coral))] text-white hover:bg-[hsl(var(--coral-light))]"
                 >
                   <Printer className="w-4 h-4" />
-               
                 </Button>
               </div>
             </Card>
