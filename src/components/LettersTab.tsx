@@ -121,7 +121,33 @@ Glass Heart - TENBLANK
 
 Com carinho,
 Rodrigo 🐱💕`
-  }
+  },
+  {
+  id: 10,
+  title: "Primeiro recado de 2026",
+  content: `Aninha,
+
+Você sabe o quanto eu me dedico aos meus projetos.
+Sempre levei a sério tudo aquilo que decidi construir.
+
+E hoje, meu maior projeto é você.
+
+Terminei 2025 criando uma caixinha no Nubank chamada
+"Visita Milkinha".
+Eu sei que ainda é pouco, mas é sincero.
+É planejamento, é intenção, é vontade real de te ver.
+
+Não é sobre dinheiro.
+É sobre te colocar nos meus planos,
+no meu ano e no meu futuro.
+
+Seguimos com calma, um passo de cada vez.
+Mas seguimos.
+
+Com carinho,
+Rodrigo 🐱💕`
+}
+
 ];
 
 const specialDates = [
