@@ -3,6 +3,7 @@ import catSleeping from '@/assets/cat-sleeping.png';
 
 const VideosTab = () => {
   const youtubeVideos = [
+    "https://www.youtube.com/embed/Zhb8DlJMmGU",
     "https://www.youtube.com/embed/UzZuAwgwGk4",
     "https://www.youtube.com/embed/Hhv0G5FLXXg",
     "https://www.youtube.com/embed/XH70G6bKbAY",
