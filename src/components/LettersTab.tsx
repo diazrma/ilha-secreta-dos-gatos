@@ -146,7 +146,88 @@ Mas seguimos.
 
 Com carinho,
 Rodrigo 🐱💕`
-}
+},
+{
+  id: 11,
+  title: "Primeiro recado de 2026",
+  content: `Aninha,
+
+Você sabe o quanto eu me dedico aos meus projetos.
+Sempre levei a sério tudo aquilo que decidi construir.
+
+E hoje, meu maior projeto é você.
+
+Terminei 2025 criando uma caixinha no Nubank chamada
+"Visita Milkinha".
+Eu sei que ainda é pouco, mas é sincero.
+É planejamento, é intenção, é vontade real de te ver.
+
+Não é sobre dinheiro.
+É sobre te colocar nos meus planos,
+no meu ano e no meu futuro.
+
+Seguimos com calma, um passo de cada vez.
+Mas seguimos.
+
+Com carinho,
+Rodrigo 🐱💕`
+},
+{
+  id: 12,
+  title: "Construção",
+  content: `Aninha,
+
+Eu aprendi que planejar o futuro não é sobre datas marcadas ou promessas grandes demais.
+É sobre constância. Sobre pensar no amanhã enquanto cuida bem do hoje.
+
+Quando eu falo de futuro, não falo de algo distante ou abstrato.
+Falo de escolhas reais que faço agora,
+de decisões que já te incluem,
+de um caminho que eu estou construindo com calma,
+responsabilidade e verdade.
+
+Não é pressa.
+É direção.
+Não é fantasia.
+É intenção.
+
+Eu estou construindo um futuro com você
+porque faz sentido,
+porque é leve,
+porque é real.
+E porque caminhar ao seu lado transforma o que vem pela frente
+em algo que vale a pena.
+
+Com carinho,
+Rodrigo 🐱💕`
+},
+
+// {
+//   id: 11,
+//   title: "Sobre Deus",
+//   content: `Aninha,
+
+// Desde o ano passado eu venho tentando voltar a falar com Deus.
+// Não apenas por você, mas porque tudo o que aconteceu ao meu redor
+// foi como um chamado que eu não podia mais ignorar.
+
+// As situações, as pessoas e os momentos me fizeram parar,
+// refletir e entender que eu precisava me reconectar com a fé
+// e com quem eu estou me tornando.
+
+// Por isso, decidi criar uma sessão de versículos na Ilhas dos Gatos:
+// um versículo por dia, como um lembrete diário de propósito,
+// esperança e direção.
+// Ela fica ali, do lado do botão da galeria.
+
+// Quis dividir isso com você porque isso também faz parte
+// do meu caminho.
+
+// Obrigado por existir na minha vida.
+
+// Com carinho,  
+// Rodrigo 🐱💕`
+// }
 
 ];
 
