@@ -6,6 +6,7 @@ import WelcomeModal from '@/components/WelcomeModal';
 import LettersTab from '@/components/LettersTab';
 import VideosTab from '@/components/VideosTab';
 import GalleryTab from '@/components/GalleryTab';
+import VersesTab from '@/components/VersesTab';
 import catWelcome from '@/assets/cat-welcome.png';
 import milkinha from '@/assets/milkinha.png';
 
@@ -89,7 +90,7 @@ const Index = () => {
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8 max-w-4xl">
         <Tabs defaultValue="recados" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-8 bg-card border border-border p-1 rounded-xl">
+          <TabsList className="flex w-full justify-between mb-8 bg-card border border-border p-1 rounded-xl">
             <TabsTrigger 
               value="recados" 
               className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-lg transition-all"
@@ -111,6 +112,13 @@ const Index = () => {
               <Image className="w-4 h-4" />
               <span className="hidden sm:inline">Galeria</span>
             </TabsTrigger>
+            <TabsTrigger 
+              value="versiculos"
+              className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-lg transition-all"
+            >
+              <Image className="w-4 h-4" />
+              <span className="hidden sm:inline">Versículos</span>
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="recados" className="mt-0">
@@ -124,6 +132,11 @@ const Index = () => {
           <TabsContent value="galeria" className="mt-0">
             <GalleryTab />
           </TabsContent>
+          
+          <TabsContent value="versiculos" className="mt-0">
+            <VersesTab />
+          </TabsContent>
+
         </Tabs>
       </main>
 
