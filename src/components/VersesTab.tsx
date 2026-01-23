@@ -46,7 +46,7 @@ function VersesTab() {
     return (
         <div className="min-h-screen flex flex-col items-center justify-start pt-12 p-6 text-center">
             <h1 className="text-2xl font-bold text-gray-800 mb-4">
-            ❤️ Para nós, mesmo à distância ❤️
+             Um abraço em pensamento
             </h1>
 
             <Card className="w-full max-w-lg shadow-lg border border-gray-300 rounded-lg bg-gray-50">
@@ -84,7 +84,7 @@ function VersesTab() {
             </Card>
 
             <p className="text-gray-500 text-sm mt-6 flex items-center justify-center">
-                Cada dia, uma palavra de Deus para você
+                Cada dia, uma palavra de Deus na ilha
                 <Heart className="w-4 h-4 ml-2 text-red-500" />
             </p>
         </div>
