@@ -174,7 +174,7 @@ Rodrigo 🐱💕`
 },
 {
   id: 12,
-  title: "Um Abraço em Palavras",
+  title: "Um sopro de paz",
   content: `Aninha,
 
 Hoje lembrei da Milka e quis compartilhar um pouco de paz. 🌿 Clique nos versículos no topo para um sopro de esperança.
