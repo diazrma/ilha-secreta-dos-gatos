@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Mail, Video, Image, Heart } from 'lucide-react';
+import { Mail, Video, Image, Heart, Book } from 'lucide-react';
 import PasswordScreen from '@/components/PasswordScreen';
 import WelcomeModal from '@/components/WelcomeModal';
 import LettersTab from '@/components/LettersTab';
@@ -116,7 +116,7 @@ const Index = () => {
               value="versiculos"
               className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-lg transition-all"
             >
-              <Image className="w-4 h-4" />
+              <Book className="w-4 h-4" />
               <span className="hidden sm:inline">Versículos</span>
             </TabsTrigger>
           </TabsList>
