@@ -174,11 +174,32 @@ Rodrigo 🐱💕`
 },
 {
   id: 12,
-  title: "Presença",
-  content: `
-Alguns dias pedem silêncio, outros pedem cuidado.
-Hoje, so deixo aqui um pouco de calma. 🤍
-`
+  title: "Construção",
+  content: `Aninha,
+
+Eu aprendi que planejar o futuro não é sobre datas marcadas ou promessas grandes demais.
+É sobre constância. Sobre pensar no amanhã enquanto cuida bem do hoje.
+
+Quando eu falo de futuro, não falo de algo distante ou abstrato.
+Falo de escolhas reais que faço agora,
+de decisões que já te incluem,
+de um caminho que eu estou construindo com calma,
+responsabilidade e verdade.
+
+Não é pressa.
+É direção.
+Não é fantasia.
+É intenção.
+
+Eu estou construindo um futuro com você
+porque faz sentido,
+porque é leve,
+porque é real.
+E porque caminhar ao seu lado transforma o que vem pela frente
+em algo que vale a pena.
+
+Com carinho,
+Rodrigo 🐱💕`
 },
 
 // {
