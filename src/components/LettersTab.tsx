@@ -182,13 +182,11 @@ Rodrigo 🐱💕`
 },
 {
   id: 13,
-  title: "Cuidar é também cuidar do outro",
+  title: "A poesia do wabi-sabi",
   content: `Aninha,
-  
-  Acredito que respeitar o limite do outro e o nosso próprio também é uma forma de carinho.
-  Cuidar de si mesmo, descansar quando precisamos, ajuda a cuidar do outro também.
-  Quando damos espaço e atenção na medida certa, o relacionamento se torna mais saudável e leve.
-  Às vezes, um simples “bom dia”, acompanhado de silêncio e cuidado, já diz muito.
+  O wabi-sabi é a beleza do imperfeito, do passageiro, do simples.
+  É perceber poesia nas coisas pequenas, graça nas marcas do tempo, serenidade no silêncio.
+  É encontrar encanto nas folhas que caem, nos objetos humildes, na vida que segue imperfeita e perfeita ao mesmo tempo.
   
   Com carinho,
   Rodrigo 🐱💕`
