@@ -184,13 +184,14 @@ Rodrigo 🐱💕`
   id: 13,
   title: "Cuidar é também cuidar do outro",
   content: `Aninha,
-
-Aprendi que respeitar o limite do outro, ou o seu próprio, também é carinho.  
-Sabe como estamos cansados e precisamos apenas descansar? Quando cuidamos de nós mesmos, também estamos cuidando do outro.  
-Às vezes, um simples bom dia, acompanhado de silêncio e espaço, já demonstra atenção e cuidado.
-
-Com carinho,
-Rodrigo 🐱💕`
+  
+  Acredito que respeitar o limite do outro e o nosso próprio também é uma forma de carinho.
+  Cuidar de si mesmo, descansar quando precisamos, ajuda a cuidar do outro também.
+  Quando damos espaço e atenção na medida certa, o relacionamento se torna mais saudável e leve.
+  Às vezes, um simples “bom dia”, acompanhado de silêncio e cuidado, já diz muito.
+  
+  Com carinho,
+  Rodrigo 🐱💕`
 },
 
 // {
