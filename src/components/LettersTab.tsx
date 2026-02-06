@@ -184,6 +184,7 @@ Rodrigo 🐱💕`
   id: 13,
   title: "A poesia do wabi-sabi",
   content: `Aninha,
+  
   O wabi-sabi é a beleza do imperfeito, do passageiro, do simples.
   É perceber poesia nas coisas pequenas, graça nas marcas do tempo, serenidade no silêncio.
   É encontrar encanto nas folhas que caem, nos objetos humildes, na vida que segue imperfeita e perfeita ao mesmo tempo.
