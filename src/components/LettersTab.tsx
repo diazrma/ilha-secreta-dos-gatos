@@ -180,6 +180,18 @@ Rodrigo 🐱💕`
 Hoje lembrei da Milka e quis compartilhar um pouco de paz. 🌿 Clique nos versículos no topo para um sopro de esperança.
 Rodrigo 🐱💕`
 },
+{
+  id: 13,
+  title: "Cuidar é também cuidar do outro",
+  content: `Aninha,
+
+Aprendi que respeitar o limite do outro, ou o seu próprio, também é carinho.  
+Sabe como estamos cansados e precisamos apenas descansar? Quando cuidamos de nós mesmos, também estamos cuidando do outro.  
+Às vezes, um simples bom dia, acompanhado de silêncio e espaço, já demonstra atenção e cuidado.
+
+Com carinho,
+Rodrigo 🐱💕`
+},
 
 // {
 //   id: 11,
