@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Mail, MailOpen, Heart, ArrowLeft, Share2, Printer } from 'lucide-react';
 import catLetter from '@/assets/cat-letter.png';
 import family from '@/assets/family.jpg';
+import catHug from '@/assets/catHug.gif';
 
 interface LettersTabProps {
   firstVisitDate: Date;
@@ -186,9 +187,10 @@ Rodrigo 🐱💕`
     title: "Só queria que você soubesse...",
     content: `Hoje só queria te dizer algo diferente:
         
-    Vejo como tua família é tua base, tua história, valorizo muito isso, e eu fico feliz de poder estar perto de ti sem mudar o que já foi construído. 
-    Cada momento assim com eles ou com nossa querida Milkinha, me faz valorizar ainda mais o que a gente tem.
-    Um abraço pra eles 🫂`,
+Vejo como tua família é tua base, tua história, valorizo muito isso, e eu fico feliz de poder estar perto de ti sem mudar o que já foi construído. 
+Cada momento assim com eles ou com nossa querida Milkinha, me faz valorizar ainda mais o que a gente tem.
+
+Um abraço pra eles 🫂`,
     img: family
   }
 ];
@@ -225,13 +227,11 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
 
   const openLetter = (index: number) => {
     const letterId = letters[index].id;
-
     if (!openedLetters.includes(letterId)) {
       const updated = [...openedLetters, letterId];
       setOpenedLetters(updated);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
     }
-
     setSelectedLetter(index);
   };
 
@@ -247,7 +247,6 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
     const specialDate = specialDates.find(
       (date) => date.day === day && date.month === month
     );
-
     if (specialDate) {
       const isChristmas = specialDate.day === 25 && specialDate.month === 12;
       return { message: specialDate.message, isChristmas };
@@ -306,6 +305,7 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
           </div>
 
           <CardContent className="p-6 min-h-[350px] text-lg">
+            {/* Imagem da carta */}
             {letter.img && (
               <div className="mb-4 text-center">
                 <img
@@ -316,12 +316,25 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
               </div>
             )}
 
+            {/* Conteúdo da carta */}
             <div
               dangerouslySetInnerHTML={{
                 __html: letter.content.replace(/\n/g, '<br>')
               }}
             />
 
+            {/* Adiciona catHug antes da frase de abraço na carta 13 */}
+            {letter.id === 13 && (
+              <div className="text-center mt-4">
+                <img
+                  src={catHug}
+                  className="w-40 mx-auto mb-2"
+                  alt="Cat Hug"
+                />
+              </div>
+            )}
+
+            {/* Link do Jogo da Milkinha */}
             {letter.id === 6 && (
               <div className="mt-4 text-center">
                 <a
