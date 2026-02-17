@@ -185,7 +185,7 @@ Rodrigo 🐱💕`
   {
     id: 13,
     title: "Só queria que você soubesse...",
-    content: `Hoje só queria te dizer algo diferente:
+    content: `
         
 Vejo como tua família é tua base, tua história, valorizo muito isso, e eu fico feliz de poder estar perto de ti sem mudar o que já foi construído. 
 Cada momento assim com eles ou com nossa querida Milkinha, me faz valorizar ainda mais o que a gente tem.
