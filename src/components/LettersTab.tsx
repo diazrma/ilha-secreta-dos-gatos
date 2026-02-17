@@ -191,7 +191,7 @@ Vejo como tua família é tua base, tua história, valorizo muito isso, e eu fic
 Cada momento assim com eles ou com nossa querida Milkinha, me faz valorizar ainda mais o que a gente tem.
 
 Um abraço pra eles 🫂`,
-    img: family
+    
   }
 ];
 
