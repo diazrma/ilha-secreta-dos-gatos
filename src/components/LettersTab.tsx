@@ -2,9 +2,7 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Mail, MailOpen, Heart, ArrowLeft, Share2, Printer } from 'lucide-react';
-import catLetter from '@/assets/cat-letter.png';
-import family from '@/assets/family.jpg';
-import catHug from '@/assets/catHug.gif';
+import catLetter from '@/assets/naruzinha.png';
 
 interface LettersTabProps {
   firstVisitDate: Date;
@@ -83,23 +81,23 @@ Rodrigo 🐱💕`
     title: "Akai Ito",
     content: `Aninha,
     
-Algumas coisas não precisam ser entendidas agora.
-Os japoneses chamam isso de Akai Ito.
-Boa semana.
+    Algumas coisas não precisam ser entendidas agora.
+    Os japoneses chamam isso de Akai Ito.
+    Boa semana.
     
-Com carinho,
-Rodrigo 🐱💕`
+    Com carinho,
+    Rodrigo 🐱💕`
   },
   {
     id: 8,
     title: "Porto Seguro",
     content: `Aninha,
-Às vezes a vida aperta, os pensamentos ficam pesados e o coração fica meio perdido tentando entender tudo. Mas eu quero que você saiba que não precisa enfrentar nada sozinha. A partir de agora, eu sou o seu porto seguro, alguém para te apoiar, acalmar, ouvir e caminhar junto com você, no que vier.
+    Às vezes a vida aperta, os pensamentos ficam pesados e o coração fica meio perdido tentando entender tudo. Mas eu quero que você saiba que não precisa enfrentar nada sozinha. A partir de agora, eu sou o seu porto seguro alguém para te apoiar, acalmar, ouvir e caminhar junto com você, no que vier.
   
-Você pode contar comigo.
+    Você pode contar comigo.
   
-Com carinho,
-Rodrigo 🐱💕`
+    Com carinho,
+    Rodrigo 🐱💕`
   },
   {
     id: 9,
@@ -125,9 +123,9 @@ Com carinho,
 Rodrigo 🐱💕`
   },
   {
-    id: 10,
-    title: "Primeiro recado de 2026",
-    content: `Aninha,
+  id: 10,
+  title: "Primeiro recado de 2026",
+  content: `Aninha,
 
 Você sabe o quanto eu me dedico aos meus projetos.
 Sempre levei a sério tudo aquilo que decidi construir.
@@ -148,11 +146,11 @@ Mas seguimos.
 
 Com carinho,
 Rodrigo 🐱💕`
-  },
-  {
-    id: 11,
-    title: "Primeiro recado de 2026",
-    content: `Aninha,
+},
+{
+  id: 11,
+  title: "Primeiro recado de 2026",
+  content: `Aninha,
 
 Você sabe o quanto eu me dedico aos meus projetos.
 Sempre levei a sério tudo aquilo que decidi construir.
@@ -173,26 +171,54 @@ Mas seguimos.
 
 Com carinho,
 Rodrigo 🐱💕`
-  },
-  {
-    id: 12,
-    title: "Um sopro de paz",
-    content: `Aninha,
+},
+{
+  id: 12,
+  title: "Um sopro de paz",
+  content: `Aninha,
 
 Hoje lembrei da Milka e quis compartilhar um pouco de paz. 🌿 Clique nos versículos no topo para um sopro de esperança.
 Rodrigo 🐱💕`
-  },
-  {
-    id: 13,
-    title: "Só queria que você soubesse...",
-    content: `
-        
-Vejo como tua família é tua base, tua história, valorizo muito isso, e eu fico feliz de poder estar perto de ti sem mudar o que já foi construído. 
-Cada momento assim com eles ou com nossa querida Milkinha, me faz valorizar ainda mais o que a gente tem.
+},
+{
+  id: 13,
+  title: "A poesia do wabi-sabi",
+  content: `  
+  O wabi-sabi é a beleza do imperfeito, do passageiro, do simples.
+  É perceber poesia nas coisas pequenas, graça nas marcas do tempo, serenidade no silêncio.
+  É encontrar encanto nas folhas que caem, nos objetos humildes, na vida que segue imperfeita e perfeita ao mesmo tempo.
+  
+  Com carinho,
+  Rodrigo 🐱💕`
+},
 
-Um abraço pra eles 🫂`,
-    
-  }
+// {
+//   id: 11,
+//   title: "Sobre Deus",
+//   content: `Aninha,
+
+// Desde o ano passado eu venho tentando voltar a falar com Deus.
+// Não apenas por você, mas porque tudo o que aconteceu ao meu redor
+// foi como um chamado que eu não podia mais ignorar.
+
+// As situações, as pessoas e os momentos me fizeram parar,
+// refletir e entender que eu precisava me reconectar com a fé
+// e com quem eu estou me tornando.
+
+// Por isso, decidi criar uma sessão de versículos na Ilhas dos Gatos:
+// um versículo por dia, como um lembrete diário de propósito,
+// esperança e direção.
+// Ela fica ali, do lado do botão da galeria.
+
+// Quis dividir isso com você porque isso também faz parte
+// do meu caminho.
+
+// Obrigado por existir na minha vida.
+
+// Com carinho,  
+// Rodrigo 🐱💕`
+// }
+
 ];
 
 const specialDates = [
@@ -227,11 +253,13 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
 
   const openLetter = (index: number) => {
     const letterId = letters[index].id;
+
     if (!openedLetters.includes(letterId)) {
       const updated = [...openedLetters, letterId];
       setOpenedLetters(updated);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
     }
+
     setSelectedLetter(index);
   };
 
@@ -242,15 +270,19 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
 
   const getSpecialMessage = () => {
     const today = new Date();
+
     const day = TEST_DAY ?? today.getDate();
     const month = TEST_MONTH ?? (today.getMonth() + 1);
+
     const specialDate = specialDates.find(
       (date) => date.day === day && date.month === month
     );
+
     if (specialDate) {
       const isChristmas = specialDate.day === 25 && specialDate.month === 12;
       return { message: specialDate.message, isChristmas };
     }
+
     return null;
   };
 
@@ -305,36 +337,12 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
           </div>
 
           <CardContent className="p-6 min-h-[350px] text-lg">
-            {/* Imagem da carta */}
-            {letter.img && (
-              <div className="mb-4 text-center">
-                <img
-                  src={letter.img}
-                  className="w-full max-w-md mx-auto rounded-lg"
-                  alt="Family"
-                />
-              </div>
-            )}
-
-            {/* Conteúdo da carta */}
             <div
               dangerouslySetInnerHTML={{
                 __html: letter.content.replace(/\n/g, '<br>')
               }}
             />
 
-            {/* Adiciona catHug antes da frase de abraço na carta 13 */}
-            {letter.id === 13 && (
-              <div className="text-center mt-4">
-                <img
-                  src={catHug}
-                  className="w-40 mx-auto mb-2"
-                  alt="Cat Hug"
-                />
-              </div>
-            )}
-
-            {/* Link do Jogo da Milkinha */}
             {letter.id === 6 && (
               <div className="mt-4 text-center">
                 <a
@@ -356,7 +364,7 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
   return (
     <div>
       <div className="text-center mb-8">
-        <img src={catLetter} className="w-28 h-28 mx-auto mb-4" />
+        <img src={catLetter} className="w-28 h-29 mx-auto mb-0" />
         <h2 className="text-3xl">Suas Cartas</h2>
       </div>
 

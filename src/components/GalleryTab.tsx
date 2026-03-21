@@ -4,7 +4,7 @@ import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Image, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import catSleeping from '@/assets/cat-sleeping.png';
+import catSleeping from '@/assets/hopinho.png';
 import img1 from '@/assets/1.jpeg';
 import img2 from '@/assets/2.png';
 import img3 from '@/assets/3.png';
@@ -17,9 +17,15 @@ import img11 from '@/assets/11.jpeg';
 import img12 from '@/assets/12.jpeg';
 import img13 from '@/assets/13.jpeg';
 
+import img14 from '@/assets/14.png';
+import img15 from '@/assets/15.png';
+import img16 from '@/assets/16.png';
+import img17 from '@/assets/17.png';
+
+
 
 const GalleryTab = () => {
-  const images = [img1, img2, img3, img4, img7, img8, img9, img10, img11, img12, img13];
+  const images = [img1, img2, img3, img4, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17];
 
   const [open, setOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);

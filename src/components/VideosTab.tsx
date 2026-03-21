@@ -1,5 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
-import catSleeping from '@/assets/cat-sleeping.png';
+import catSleeping from '@/assets/zeldinha.png';
 
 const VideosTab = () => {
   const youtubeVideos = [
