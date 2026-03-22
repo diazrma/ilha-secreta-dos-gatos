@@ -1,17 +1,33 @@
-import { useState, useEffect } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Mail, MailOpen, Heart, ArrowLeft, Share2, Printer, X } from 'lucide-react';
-import catLetter from '@/assets/naruzinha.png';
-
-const STORAGE_KEY = 'opened_letters';
-const SUPABASE_URL = 'https://rourcapjttsvsjnqafxi.supabase.co/rest/v1/recados';
-const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJvdXJjYXBqdHRzdnNqbnFhZnhpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMzU1ODAsImV4cCI6MjA4OTcxMTU4MH0.7f7G0pR8QrgKWp3hZCcu7uH3YxFJEbyooXYNd9Yd5fE';
+import { useState, useEffect } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Mail,
+  MailOpen,
+  Heart,
+  ArrowLeft,
+  Share2,
+  Printer,
+  X,
+  Trash,
+} from "lucide-react";
+import catLetter from "@/assets/naruzinha.png";
+declare global {
+  interface Window {
+    OneSignal: any;
+    OneSignalDeferred: any[];
+  }
+}
+const STORAGE_KEY = "opened_letters";
+const SUPABASE_URL = "https://rourcapjttsvsjnqafxi.supabase.co/rest/v1/recados";
+const SUPABASE_API_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJvdXJjYXBqdHRzdnNqbnFhZnhpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMzU1ODAsImV4cCI6MjA4OTcxMTU4MH0.7f7G0pR8QrgKWp3hZCcu7uH3YxFJEbyooXYNd9Yd5fE";
 
 const fixedMessages = [
   {
     id: 1,
     title: "Para começar...",
+    isFixed: true,
     content: `Aninha,
 
 Se você está lendo isso, é porque de alguma forma nossas conversas, nossos gatinhos e nossas risadas pelo WhatsApp criaram algo especial.
@@ -19,61 +35,67 @@ Se você está lendo isso, é porque de alguma forma nossas conversas, nossos ga
 Mesmo sem estarmos no mesmo lugar, senti vontade de guardar aqui alguns pedacinhos dos meus pensamentos para você.
 
 Com carinho,
-Rodrigo 🐱💕`
+Rodrigo 🐱💕`,
   },
   {
     id: 2,
     title: "Sobre nós dois",
+    isFixed: true,
     content: `Aninha,
 
 Mesmo à distância, sinto que existe uma conexão leve e gostosa entre nós. Você tem um jeito único que acalma e encanta.
 
 Com carinho,
-Rodrigo 🐱💕`
+Rodrigo 🐱💕`,
   },
   {
     id: 3,
     title: "O que você representa",
+    isFixed: true,
     content: `Aninha,
 
 Você virou uma parte bonita dos meus dias. Obrigado por existir e ter cruzado meu caminho.
 
 Com carinho,
-Rodrigo 🐱💕`
+Rodrigo 🐱💕`,
   },
   {
     id: 4,
     title: "Nossos sonhos",
+    isFixed: true,
     content: `Aninha,
 
 Às vezes imagino o dia em que a distância será apenas uma lembrança do começo da nossa história.
 
 Com carinho,
-Rodrigo 🐱💕`
+Rodrigo 🐱💕`,
   },
   {
     id: 5,
     title: "Para o que está por vir",
+    isFixed: true,
     content: `Aninha,
 
 Não sei onde tudo isso vai nos levar, mas a ideia de um "nós" me deixa feliz e esperançoso.
 
 Com carinho,
-Rodrigo 🐱💕`
+Rodrigo 🐱💕`,
   },
   {
     id: 6,
     title: "Jogo da Milka",
+    isFixed: true,
     content: `Aninha,
 
 Eu precisava compartilhar isso com você: eu criei um jogo da Milkinha usando inteligência artificial 🤍
 
 Com carinho,
-Rodrigo 🐱💕`
+Rodrigo 🐱💕`,
   },
   {
     id: 7,
     title: "Akai Ito",
+    isFixed: true,
     content: `Aninha,
     
     Algumas coisas não precisam ser entendidas agora.
@@ -81,22 +103,24 @@ Rodrigo 🐱💕`
     Boa semana.
     
     Com carinho,
-    Rodrigo 🐱💕`
+    Rodrigo 🐱💕`,
   },
   {
     id: 8,
     title: "Porto Seguro",
+    isFixed: true,
     content: `Aninha,
     Às vezes a vida aperta, os pensamentos ficam pesados e o coração fica meio perdido tentando entender tudo. Mas eu quero que você saiba que não precisa enfrentar nada sozinha. A partir de agora, eu sou o seu porto seguro alguém para te apoiar, acalmar, ouvir e caminhar junto com você, no que vier.
   
     Você pode contar comigo.
   
     Com carinho,
-    Rodrigo 🐱💕`
+    Rodrigo 🐱💕`,
   },
   {
     id: 9,
     title: "Ultimo recado do Ano 2025",
+    isFixed: true,
     content: `Aninha,
 
 São cinco anos desde que te conheço.
@@ -115,12 +139,13 @@ Glass Heart - TENBLANK
 </a>
 
 Com carinho,
-Rodrigo 🐱💕`
+Rodrigo 🐱💕`,
   },
   {
-  id: 10,
-  title: "Primeiro recado de 2026",
-  content: `Aninha,
+    id: 10,
+    title: "Primeiro recado de 2026",
+    isFixed: true,
+    content: `Aninha,
 
 Você sabe o quanto eu me dedico aos meus projetos.
 Sempre levei a sério tudo aquilo que decidi construir.
@@ -140,12 +165,13 @@ Seguimos com calma, um passo de cada vez.
 Mas seguimos.
 
 Com carinho,
-Rodrigo 🐱💕`
-},
-{
-  id: 11,
-  title: "Primeiro recado de 2026",
-  content: `Aninha,
+Rodrigo 🐱💕`,
+  },
+  {
+    id: 11,
+    title: "Primeiro recado de 2026",
+    isFixed: true,
+    content: `Aninha,
 
 Você sabe o quanto eu me dedico aos meus projetos.
 Sempre levei a sério tudo aquilo que decidi construir.
@@ -165,55 +191,56 @@ Seguimos com calma, um passo de cada vez.
 Mas seguimos.
 
 Com carinho,
-Rodrigo 🐱💕`
-},
-{
-  id: 12,
-  title: "Um sopro de paz",
-  content: `Aninha,
+Rodrigo 🐱💕`,
+  },
+  {
+    id: 12,
+    title: "Um sopro de paz",
+    isFixed: true,
+    content: `Aninha,
 
 Hoje lembrei da Milka e quis compartilhar um pouco de paz. 🌿 Clique nos versículos no topo para um sopro de esperança.
-Rodrigo 🐱💕`
-},
-{
-  id: 13,
-  title: "A poesia do wabi-sabi",
-  content: `  
+Rodrigo 🐱💕`,
+  },
+  {
+    id: 13,
+    title: "A poesia do wabi-sabi",
+    isFixed: true,
+    content: `  
   O wabi-sabi é a beleza do imperfeito, do passageiro, do simples.
   É perceber poesia nas coisas pequenas, graça nas marcas do tempo, serenidade no silêncio.
   É encontrar encanto nas folhas que caem, nos objetos humildes, na vida que segue imperfeita e perfeita ao mesmo tempo.
   
   Com carinho,
-  Rodrigo 🐱💕`
-},
+  Rodrigo 🐱💕`,
+  },
 
-// {
-//   id: 11,
-//   title: "Sobre Deus",
-//   content: `Aninha,
+  // {
+  //   id: 11,
+  //   title: "Sobre Deus",
+  //   content: `Aninha,
 
-// Desde o ano passado eu venho tentando voltar a falar com Deus.
-// Não apenas por você, mas porque tudo o que aconteceu ao meu redor
-// foi como um chamado que eu não podia mais ignorar.
+  // Desde o ano passado eu venho tentando voltar a falar com Deus.
+  // Não apenas por você, mas porque tudo o que aconteceu ao meu redor
+  // foi como um chamado que eu não podia mais ignorar.
 
-// As situações, as pessoas e os momentos me fizeram parar,
-// refletir e entender que eu precisava me reconectar com a fé
-// e com quem eu estou me tornando.
+  // As situações, as pessoas e os momentos me fizeram parar,
+  // refletir e entender que eu precisava me reconectar com a fé
+  // e com quem eu estou me tornando.
 
-// Por isso, decidi criar uma sessão de versículos na Ilhas dos Gatos:
-// um versículo por dia, como um lembrete diário de propósito,
-// esperança e direção.
-// Ela fica ali, do lado do botão da galeria.
+  // Por isso, decidi criar uma sessão de versículos na Ilhas dos Gatos:
+  // um versículo por dia, como um lembrete diário de propósito,
+  // esperança e direção.
+  // Ela fica ali, do lado do botão da galeria.
 
-// Quis dividir isso com você porque isso também faz parte
-// do meu caminho.
+  // Quis dividir isso com você porque isso também faz parte
+  // do meu caminho.
 
-// Obrigado por existir na minha vida.
+  // Obrigado por existir na minha vida.
 
-// Com carinho,  
-// Rodrigo 🐱💕`
-// }
-
+  // Com carinho,
+  // Rodrigo 🐱💕`
+  // }
 ];
 
 const specialDates = [
@@ -236,13 +263,49 @@ Que este ano seja cheio de realizações, sonhos e momentos felizes para você. 
 ];
 
 const LettersTab = () => {
+  const [oneSignalReady, setOneSignalReady] = useState(false);
   const [selectedLetter, setSelectedLetter] = useState<number | null>(null);
   const [openedLetters, setOpenedLetters] = useState<number[]>([]);
-  const [newMessage, setNewMessage] = useState({ title: '', content: '' });
+  const [newMessage, setNewMessage] = useState({ title: "", content: "" });
   const [messages, setMessages] = useState(fixedMessages);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showInstall, setShowInstall] = useState(false);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+
+  const [deleteModal, setDeleteModal] = useState<{
+    open: boolean;
+    id: number | null;
+    isFixed: boolean;
+  }>({
+    open: false,
+    id: null,
+    isFixed: false,
+  });
 
   useEffect(() => {
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+  
+    const script = document.createElement("script");
+    script.src = "https://cdn.onesignal.com/sdks/OneSignalSDK.js";
+    script.async = true;
+    document.body.appendChild(script);
+  
+    script.onload = () => {
+      window.OneSignalDeferred.push(async (OneSignal: any) => {
+        await OneSignal.init({
+          appId: "689d2af6-2afb-480f-b3e7-c31053aa6aed",
+        });
+        console.log("OneSignal inicializado");
+      });
+    };
+  
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  useEffect(() => {
+
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       setOpenedLetters(JSON.parse(saved));
@@ -268,9 +331,17 @@ const LettersTab = () => {
           setMessages([...fixedMessages, ...fetchedMessages]);
         }
       })
-      .catch((err) => console.error('Failed to fetch messages:', err));
+      .catch((err) => console.error("Failed to fetch messages:", err));
   }, []);
 
+    const enableNotifications = () => {
+      if (window.OneSignal) {
+        window.OneSignal.push(() => {
+          window.OneSignal.showSlidedownPrompt();
+        });
+      }
+    };
+  
   const openLetter = (index: number) => {
     const letterId = messages[index].id;
 
@@ -287,13 +358,13 @@ const LettersTab = () => {
     if (letterId <= 6) return true;
     return openedLetters.includes(letterId);
   };
- const TEST_DAY = null;
- const TEST_MONTH = null;
+  const TEST_DAY = null;
+  const TEST_MONTH = null;
   const getSpecialMessage = () => {
     const today = new Date();
 
     const day = TEST_DAY ?? today.getDate();
-    const month = TEST_MONTH ?? (today.getMonth() + 1);
+    const month = TEST_MONTH ?? today.getMonth() + 1;
 
     const specialDate = specialDates.find(
       (date) => date.day === day && date.month === month
@@ -311,11 +382,11 @@ const LettersTab = () => {
     const message = `${title}\n\n${content}`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
-    window.open(whatsappUrl, '_blank');
+    window.open(whatsappUrl, "_blank");
   };
 
   const printLetter = (title: string, content: string) => {
-    const printWindow = window.open('', '_blank');
+    const printWindow = window.open("", "_blank");
     if (printWindow) {
       printWindow.document.write(`
         <html>
@@ -324,7 +395,7 @@ const LettersTab = () => {
           </head>
           <body>
             <h1>${title}</h1>
-            <p>${content.replace(/\n/g, '<br>')}</p>
+            <p>${content.replace(/\n/g, "<br>")}</p>
           </body>
         </html>
       `);
@@ -332,43 +403,79 @@ const LettersTab = () => {
       printWindow.print();
     }
   };
-
-  const handleSaveMessage = async () => {
+  const handleDeleteMessage = async (id: number) => {
     try {
-      const payload = {
-        title: newMessage.title.trim(),
-        message: newMessage.content.trim(),
-      };
-
-      if (!payload.title || !payload.message) {
-        console.error('Title and message are required.');
-        return;
-      }
-
-      const response = await fetch(SUPABASE_URL, {
-        method: 'POST',
+      const response = await fetch(`${SUPABASE_URL}?id=eq.${id}`, {
+        method: "DELETE",
         headers: {
-          'Content-Type': 'application/json',
           apikey: SUPABASE_API_KEY,
           Authorization: `Bearer ${SUPABASE_API_KEY}`,
         },
-        body: JSON.stringify(payload),
       });
 
       if (response.ok) {
-        const savedMessage = response.headers.get('content-type')?.includes('application/json')
-          ? await response.json()
-          : payload; // Use the payload if no JSON is returned
-        setMessages((prev) => [...prev, savedMessage]);
-        setNewMessage({ title: '', content: '' });
-        setIsModalOpen(false);
+        setMessages((prev) => prev.filter((msg) => msg.id !== id));
       } else {
-        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
-        console.error('Failed to save message:', errorData);
+        const error = await response.text();
+        console.error("Erro ao deletar:", error);
+      }
+    } catch (err) {
+      console.error("Erro ao deletar:", err);
+    }
+  };
+
+  const handleSaveMessage = async () => {
+    const tempId = Date.now(); // ID temporário
+
+    const optimisticMessage = {
+      id: tempId,
+      title: newMessage.title.trim(),
+      content: newMessage.content.trim(),
+      isFixed: false,
+    };
+
+    // 👇 adiciona INSTANTE na tela
+    setMessages((prev) => [...prev, optimisticMessage]);
+
+    try {
+      const response = await fetch(SUPABASE_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          apikey: SUPABASE_API_KEY,
+          Authorization: `Bearer ${SUPABASE_API_KEY}`,
+          Prefer: "return=representation", // 🔥 MUITO IMPORTANTE
+        },
+        body: JSON.stringify({
+          title: optimisticMessage.title,
+          message: optimisticMessage.content,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data && data[0]) {
+        const realMessage = {
+          id: data[0].id,
+          title: data[0].title,
+          content: data[0].message,
+          isFixed: false,
+        };
+
+        // 👇 troca o temporário pelo real
+        setMessages((prev) =>
+          prev.map((msg) => (msg.id === tempId ? realMessage : msg))
+        );
       }
     } catch (error) {
-      console.error('Error saving message:', error);
+      console.error("Erro ao salvar:", error);
+
+      // rollback se falhar
+      setMessages((prev) => prev.filter((msg) => msg.id !== tempId));
     }
+
+    setNewMessage({ title: "", content: "" });
+    setIsModalOpen(false);
   };
 
   const toggleModal = () => {
@@ -377,9 +484,11 @@ const LettersTab = () => {
 
   const specialMessageData = getSpecialMessage();
 
+
+
+  
   if (selectedLetter !== null) {
     const letter = messages[selectedLetter];
-
     return (
       <div>
         <Button
@@ -402,7 +511,7 @@ const LettersTab = () => {
           <CardContent className="p-6 min-h-[350px] text-lg">
             <div
               dangerouslySetInnerHTML={{
-                __html: letter.content.replace(/\n/g, '<br>')
+                __html: letter.content.replace(/\n/g, "<br>"),
               }}
             />
 
@@ -422,14 +531,70 @@ const LettersTab = () => {
         </Card>
       </div>
     );
-  }
-
+  }  
+  
   return (
     <div>
+       {/* 🔥 MODAL GLOBAL AQUI */}
+    {deleteModal.open && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
+          {deleteModal.isFixed ? (
+            <>
+              <h2 className="text-xl font-bold mb-4">Recado protegido ❤️</h2>
+              <p className="mb-4">
+                Esse recado é fixo e não pode ser apagado.
+              </p>
+
+              <Button
+                onClick={() =>
+                  setDeleteModal({ open: false, id: null, isFixed: false })
+                }
+              >
+                Entendi
+              </Button>
+            </>
+          ) : (
+            <>
+              <h2 className="text-xl font-bold mb-4">Confirmar exclusão</h2>
+              <p className="mb-4">
+                Tem certeza que deseja apagar esse recado?
+              </p>
+
+              <div className="flex justify-center gap-4">
+                <Button
+                  onClick={() =>
+                    setDeleteModal({ open: false, id: null, isFixed: false })
+                  }
+                  variant="outline"
+                >
+                  Cancelar
+                </Button>
+
+                <Button
+                  onClick={() => {
+                    if (deleteModal.id) {
+                      handleDeleteMessage(deleteModal.id);
+                    }
+                    setDeleteModal({ open: false, id: null, isFixed: false });
+                  }}
+                  className="bg-red-500 text-white hover:bg-red-600"
+                >
+                  Apagar
+                </Button>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    )}
       {/* Button to open the modal */}
-      <div className="mb-8 text-center">
+      <div className="mb-8 text-center flex justify-center gap-4">
         <Button onClick={toggleModal} className="bg-primary text-white">
           Escrever Novo Recado
+        </Button>
+        <Button onClick={enableNotifications} variant="outline">
+          Ativar notificações 💌
         </Button>
       </div>
 
@@ -439,7 +604,10 @@ const LettersTab = () => {
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold">Escrever Novo Recado</h2>
-              <button onClick={toggleModal} className="text-gray-500 hover:text-gray-800">
+              <button
+                onClick={toggleModal}
+                className="text-gray-500 hover:text-gray-800"
+              >
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -447,17 +615,24 @@ const LettersTab = () => {
               type="text"
               placeholder="Título"
               value={newMessage.title}
-              onChange={(e) => setNewMessage({ ...newMessage, title: e.target.value })}
+              onChange={(e) =>
+                setNewMessage({ ...newMessage, title: e.target.value })
+              }
               className="w-full mb-2 p-2 border rounded"
             />
             <textarea
               placeholder="Conteúdo"
               value={newMessage.content}
-              onChange={(e) => setNewMessage({ ...newMessage, content: e.target.value })}
+              onChange={(e) =>
+                setNewMessage({ ...newMessage, content: e.target.value })
+              }
               className="w-full mb-2 p-2 border rounded"
             />
             <div className="flex justify-end">
-              <Button onClick={handleSaveMessage} className="bg-primary text-white">
+              <Button
+                onClick={handleSaveMessage}
+                className="bg-primary text-white"
+              >
                 Salvar Recado
               </Button>
             </div>
@@ -496,7 +671,7 @@ const LettersTab = () => {
               <CardContent className="p-4 flex items-center gap-4">
                 <div
                   className="w-12 h-12 flex items-center justify-center"
-                  style={{ color: 'hsl(var(--primary))' }}
+                  style={{ color: "hsl(var(--primary))" }}
                 >
                   {open ? <MailOpen /> : <Mail />}
                 </div>
@@ -505,11 +680,11 @@ const LettersTab = () => {
                   <p
                     className={`text-sm font-medium ${
                       open
-                        ? 'text-[hsl(var(--coral))]'
-                        : 'text-muted-foreground'
+                        ? "text-[hsl(var(--coral))]"
+                        : "text-muted-foreground"
                     }`}
                   >
-                    {open ? 'Carta aberta' : 'Carta fechada'}
+                    {open ? "Carta aberta" : "Carta fechada"}
                   </p>
                   <p className="flex items-center gap-2 text-lg font-semibold text-primary">
                     <Heart className="w-4 h-4 fill-primary text-primary" />
@@ -532,13 +707,28 @@ const LettersTab = () => {
                 >
                   <Printer className="w-4 h-4" />
                 </Button>
+                <Button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setDeleteModal({
+                    open: true,
+                    id: letter.id,
+                    isFixed: !!letter.isFixed,
+                  });
+                }}
+                  className="bg-red-500 text-white hover:bg-red-600"
+                >
+                  <Trash className="w-4 h-4" />
+                </Button>
               </div>
             </Card>
           );
         })}
       </div>
     </div>
+    
   );
+
 };
 
 export default LettersTab;
