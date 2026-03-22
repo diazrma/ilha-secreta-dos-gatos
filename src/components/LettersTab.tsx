@@ -589,12 +589,9 @@ const LettersTab = () => {
       </div>
     )}
       {/* Button to open the modal */}
-      <div className="mb-8 text-center flex justify-center gap-4">
+      <div className="mb-8 text-center flex justify-center">
         <Button onClick={toggleModal} className="bg-primary text-white">
           Escrever Novo Recado
-        </Button>
-        <Button onClick={enableNotifications} variant="outline">
-          Ativar notificações 💌
         </Button>
       </div>
 
