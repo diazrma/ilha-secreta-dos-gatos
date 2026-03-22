@@ -1,19 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Mail, MailOpen, Heart, ArrowLeft, Share2, Printer } from 'lucide-react';
+import { Mail, MailOpen, Heart, ArrowLeft, Share2, Printer, X } from 'lucide-react';
 import catLetter from '@/assets/naruzinha.png';
 
-interface LettersTabProps {
-  firstVisitDate: Date;
-}
-
 const STORAGE_KEY = 'opened_letters';
+const SUPABASE_URL = 'https://rourcapjttsvsjnqafxi.supabase.co/rest/v1/recados';
+const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJvdXJjYXBqdHRzdnNqbnFhZnhpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMzU1ODAsImV4cCI6MjA4OTcxMTU4MH0.7f7G0pR8QrgKWp3hZCcu7uH3YxFJEbyooXYNd9Yd5fE';
 
-const TEST_DAY: number | null = null;
-const TEST_MONTH: number | null = null;
-
-const letters = [
+const fixedMessages = [
   {
     id: 1,
     title: "Para começar...",
@@ -240,19 +235,44 @@ Que este ano seja cheio de realizações, sonhos e momentos felizes para você. 
   },
 ];
 
-const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
+const LettersTab = () => {
   const [selectedLetter, setSelectedLetter] = useState<number | null>(null);
   const [openedLetters, setOpenedLetters] = useState<number[]>([]);
+  const [newMessage, setNewMessage] = useState({ title: '', content: '' });
+  const [messages, setMessages] = useState(fixedMessages);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       setOpenedLetters(JSON.parse(saved));
     }
+
+    // Fetch messages from Supabase API
+    fetch(SUPABASE_URL, {
+      headers: {
+        apikey: SUPABASE_API_KEY,
+        Authorization: `Bearer ${SUPABASE_API_KEY}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          // Combine fixed messages with fetched messages
+          const fetchedMessages = data.map((msg) => ({
+            id: msg.id,
+            title: msg.title,
+            content: msg.message, // Map "message" to "content"
+            createdAt: msg.created_at, // Map "created_at" to "createdAt"
+          }));
+          setMessages([...fixedMessages, ...fetchedMessages]);
+        }
+      })
+      .catch((err) => console.error('Failed to fetch messages:', err));
   }, []);
 
   const openLetter = (index: number) => {
-    const letterId = letters[index].id;
+    const letterId = messages[index].id;
 
     if (!openedLetters.includes(letterId)) {
       const updated = [...openedLetters, letterId];
@@ -267,7 +287,8 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
     if (letterId <= 6) return true;
     return openedLetters.includes(letterId);
   };
-
+ const TEST_DAY = null;
+ const TEST_MONTH = null;
   const getSpecialMessage = () => {
     const today = new Date();
 
@@ -312,10 +333,52 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
     }
   };
 
+  const handleSaveMessage = async () => {
+    try {
+      const payload = {
+        title: newMessage.title.trim(),
+        message: newMessage.content.trim(),
+      };
+
+      if (!payload.title || !payload.message) {
+        console.error('Title and message are required.');
+        return;
+      }
+
+      const response = await fetch(SUPABASE_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: SUPABASE_API_KEY,
+          Authorization: `Bearer ${SUPABASE_API_KEY}`,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        const savedMessage = response.headers.get('content-type')?.includes('application/json')
+          ? await response.json()
+          : payload; // Use the payload if no JSON is returned
+        setMessages((prev) => [...prev, savedMessage]);
+        setNewMessage({ title: '', content: '' });
+        setIsModalOpen(false);
+      } else {
+        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+        console.error('Failed to save message:', errorData);
+      }
+    } catch (error) {
+      console.error('Error saving message:', error);
+    }
+  };
+
+  const toggleModal = () => {
+    setIsModalOpen((prev) => !prev);
+  };
+
   const specialMessageData = getSpecialMessage();
 
   if (selectedLetter !== null) {
-    const letter = letters[selectedLetter];
+    const letter = messages[selectedLetter];
 
     return (
       <div>
@@ -363,6 +426,45 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
 
   return (
     <div>
+      {/* Button to open the modal */}
+      <div className="mb-8 text-center">
+        <Button onClick={toggleModal} className="bg-primary text-white">
+          Escrever Novo Recado
+        </Button>
+      </div>
+
+      {/* Modal for the form */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold">Escrever Novo Recado</h2>
+              <button onClick={toggleModal} className="text-gray-500 hover:text-gray-800">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <input
+              type="text"
+              placeholder="Título"
+              value={newMessage.title}
+              onChange={(e) => setNewMessage({ ...newMessage, title: e.target.value })}
+              className="w-full mb-2 p-2 border rounded"
+            />
+            <textarea
+              placeholder="Conteúdo"
+              value={newMessage.content}
+              onChange={(e) => setNewMessage({ ...newMessage, content: e.target.value })}
+              className="w-full mb-2 p-2 border rounded"
+            />
+            <div className="flex justify-end">
+              <Button onClick={handleSaveMessage} className="bg-primary text-white">
+                Salvar Recado
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="text-center mb-8">
         <img src={catLetter} className="w-28 h-29 mx-auto mb-0" />
         <h2 className="text-3xl">Suas Cartas</h2>
@@ -382,7 +484,7 @@ const LettersTab = ({ firstVisitDate }: LettersTabProps) => {
       )}
 
       <div className="grid gap-4 max-w-2xl mx-auto">
-        {letters.map((letter, index) => {
+        {messages.map((letter, index) => {
           const open = isLetterOpen(letter.id);
 
           return (
