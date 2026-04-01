@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
@@ -22,9 +23,9 @@ import img15 from '@/assets/15.png';
 import img16 from '@/assets/16.png';
 import img17 from '@/assets/17.png';
 
-import img18 from '@/assets/18.jpeg';
-import img19 from '@/assets/19.jpeg';
-import img20 from '@/assets/20.jpeg';
+import img18 from '@/assets/18.png';
+import img19 from '@/assets/19.jpg';
+import img20 from '@/assets/20.jpg';
 import img21 from '@/assets/21.jpeg';
 import img22 from '@/assets/22.jpeg';
 
