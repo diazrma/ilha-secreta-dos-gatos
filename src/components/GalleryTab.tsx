@@ -22,10 +22,15 @@ import img15 from '@/assets/15.png';
 import img16 from '@/assets/16.png';
 import img17 from '@/assets/17.png';
 
+import img18 from '@/assets/18.jpeg';
+import img19 from '@/assets/19.jpeg';
+import img20 from '@/assets/20.jpeg';
+import img21 from '@/assets/21.jpeg';
+import img22 from '@/assets/22.jpeg';
 
 
 const GalleryTab = () => {
-  const images = [img1, img2, img3, img4, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17];
+  const images = [img1, img2, img3, img4, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21, img22];
 
   const [open, setOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
